@@ -15,7 +15,7 @@ font_ = ("Handlee", 16)
 
 
 def search_function(search_term):
-    webbrowser.open("https://google.com/maps/place/" + str(search_term))
+    webbrowser.open(f"https://google.com/maps/place/{str(search_term)}")
 
 
 canvas = tk.Canvas(root, height=Height, width=Width, bg=canvas_color)

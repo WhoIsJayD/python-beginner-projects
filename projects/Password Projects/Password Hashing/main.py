@@ -16,5 +16,5 @@ hashtype = args.type
 # Hash the password, using the hash function that the user provided
 m = getattr(hashlib, hashtype)()
 m.update(password.encode())
-print("< hash-type : " + hashtype + " >")
+print(f"< hash-type : {hashtype} >")
 print(m.hexdigest())

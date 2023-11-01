@@ -23,9 +23,7 @@ async def get_popular_movies():
     if response.status_code != 200:
         raise HTTPException(status_code=response.status_code, detail=response.content)
 
-    movie_data = response.json()
-
-    return movie_data
+    return response.json()
 
 
 @app.get("/movies/{movie_id}")
@@ -38,9 +36,7 @@ async def get_movie(movie_id: int):
     if response.status_code != 200:
         raise HTTPException(status_code=response.status_code, detail=response.content)
 
-    movie_data = response.json()
-
-    return movie_data
+    return response.json()
 
 
 @app.post("/movies/{movie_id}/rate")

@@ -106,10 +106,7 @@ class SnakeGame:
         ):
             return True
         # hits itself
-        if self.head in self.snake[1:]:
-            return True
-
-        return False
+        return self.head in self.snake[1:]
 
     def _update_ui(self):
         self.display.fill(BLACK)
@@ -128,7 +125,7 @@ class SnakeGame:
             pygame.Rect(self.food.x, self.food.y, BLOCK_SIZE, BLOCK_SIZE),
         )
 
-        text = font.render("Score: " + str(self.score), True, WHITE)
+        text = font.render(f"Score: {str(self.score)}", True, WHITE)
         self.display.blit(text, [0, 0])
         pygame.display.flip()
 

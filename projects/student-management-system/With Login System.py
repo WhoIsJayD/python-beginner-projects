@@ -57,7 +57,7 @@ def search_student():
     print("--- Search Student ---")
     print("------------------------")
     a = input("Enter the sch no. of the student:")
-    mycursor.execute("select * from studentsinfo where Sch_no=('" + a + "')")
+    mycursor.execute(f"select * from studentsinfo where Sch_no=('{a}')")
     result = mycursor.fetchall()
     if len(result) == 0:
         print("Enter valid sch no.!")
@@ -103,7 +103,7 @@ def delete_student():
     print("--- Delete Student ---")
     print("------------------------")
     var1 = input("Enter the sch no. of the student:")
-    mycursor.execute("delete from studentsinfo where sch_no=('" + var1 + "')")
+    mycursor.execute(f"delete from studentsinfo where sch_no=('{var1}')")
     mydb.commit()
     print("Data deleted successfully!")
     input("Press Enter to continue!")
@@ -149,7 +149,7 @@ def register():
     print("-------------------------")
     id = str(input("Enter your Id:"))
     password = str(input("Enter your Password:"))
-    mycursor.execute("insert into admin values('" + id + "','" + password + "')")
+    mycursor.execute(f"insert into admin values('{id}','{password}')")
     mydb.commit()
     print("Registered successfully!")
     input("Press Enter to continue!")
@@ -164,7 +164,7 @@ def login():
     id = input("Enter the id:")
     password = input("Enter the password:")
     mycursor.execute(
-        "select * from admin where id=('" + id + "') and password=('" + password + "')"
+        f"select * from admin where id=('{id}') and password=('{password}')"
     )
     result = mycursor.fetchall()
     if len(result) == 1:

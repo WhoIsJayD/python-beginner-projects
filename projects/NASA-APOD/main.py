@@ -2,7 +2,7 @@ import credentials
 import requests
 import wget
 
-url = "https://api.nasa.gov/planetary/apod?api_key=" + credentials.API_KEY
+url = f"https://api.nasa.gov/planetary/apod?api_key={credentials.API_KEY}"
 
 response = requests.get(url)
 data = response.json()

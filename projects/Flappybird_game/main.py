@@ -34,15 +34,11 @@ def check_collision(pipes):
             death_sound.play()
             return False
 
-    if bird_rect.top <= -100 or bird_rect.bottom >= 512 - 75:
-        return False
-
-    return True
+    return bird_rect.top > -100 and bird_rect.bottom < 512 - 75
 
 
 def rotate_bird(bird):
-    new_bird = pygame.transform.rotozoom(bird, -bird_movement * 5, 1)
-    return new_bird
+    return pygame.transform.rotozoom(bird, -bird_movement * 5, 1)
 
 
 def bird_animation():
@@ -129,8 +125,7 @@ while True:
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
-                bird_movement = 0
-                bird_movement -= 5
+                bird_movement = 0 - 5
                 flap_sound.play()
             if event.key == pygame.K_SPACE and game_active == False:
                 game_active = True

@@ -6,8 +6,7 @@ import shutil
 
 # Function to open an image using file dialog
 def open_image():
-    file_path = filedialog.askopenfilename()
-    if file_path:
+    if file_path := filedialog.askopenfilename():
         image = Image.open(file_path)
         photo = ImageTk.PhotoImage(image)
         label.config(image=photo)
@@ -19,8 +18,9 @@ def open_image():
 # Function to save the current image to a new location
 def save_image():
     if current_image_path:
-        destination_path = filedialog.asksaveasfilename(defaultextension=".png")
-        if destination_path:
+        if destination_path := filedialog.asksaveasfilename(
+            defaultextension=".png"
+        ):
             shutil.copy(current_image_path, destination_path)
 
 

@@ -70,12 +70,8 @@ def complexarithmetic():
     choice = input("enter your choice")
     if choice == "1":
         nums = list(map(int, input("Enter all numbers seperated by space: ").split()))
-        real_sum = 0
-        imag_sum = 0
-        for i in range(0, len(nums) - 1, 2):
-            real_sum += nums[i]
-        for i in range(2, len(nums) - 1, 2):
-            imag_sum += nums[i]
+        real_sum = sum(nums[i] for i in range(0, len(nums) - 1, 2))
+        imag_sum = sum(nums[i] for i in range(2, len(nums) - 1, 2))
         imag_sum += nums[-1]
         return f"{real_sum}+ i{imag_sum}"
 
@@ -118,8 +114,7 @@ def complexarithmetic():
 
 
 def binomail(num):
-    result = factorial(num[0]) / (factorial(num[1]) * factorial(num[0] - num[1]))
-    return result
+    return factorial(num[0]) / (factorial(num[1]) * factorial(num[0] - num[1]))
 
 
 c = 0

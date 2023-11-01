@@ -54,10 +54,7 @@ def decrypt(enc_dict, password):
     # create the cipher config
     cipher = AES.new(private_key, AES.MODE_GCM, nonce=nonce)
 
-    # decrypt the cipher text
-    decrypted = cipher.decrypt_and_verify(cipher_text, tag)
-
-    return decrypted
+    return cipher.decrypt_and_verify(cipher_text, tag)
 
 
 def main():
@@ -72,7 +69,7 @@ def main():
         encrypted = encrypt(secret_mssg, password)
         print("\n\nEncrypted:")
         print("---------------\n")
-        print("\n".join("{}: {}".format(k, v) for k, v in encrypted.items()))
+        print("\n".join(f"{k}: {v}" for k, v in encrypted.items()))
 
     # Now let us decrypt the message using our original password
     if x == 2:

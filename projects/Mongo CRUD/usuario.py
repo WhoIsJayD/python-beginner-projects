@@ -15,22 +15,19 @@ class Usuario:
 
     # INSERT REGISTER
     def inserir_um_registro(self):
-        if not self.existe_registro(self.cpf):
-            dados_usuario = dict(
-                nome=self.nome, cpf=self.cpf, idade=self.idade, altura=self.altura
-            )
-            self.usuarios.insert_one(dados_usuario)
-        else:
+        if self.existe_registro(self.cpf):
             raise Exception("Registro já existe !")
+        dados_usuario = dict(
+            nome=self.nome, cpf=self.cpf, idade=self.idade, altura=self.altura
+        )
+        self.usuarios.insert_one(dados_usuario)
 
     # FIND REGISTERS
     def pesquisa_registro(self, cpf=""):
         if cpf != "":
-            user = self.usuarios.find({"cpf": cpf}, {"_id": 0})[0]
-            return user
-        else:
-            print(f"{' Listagem de usuários ':=^40}")
-            print(pd.DataFrame(self.usuarios.find({"cpf": self.cpf}, {"_id": 0})))
+            return self.usuarios.find({"cpf": cpf}, {"_id": 0})[0]
+        print(f"{' Listagem de usuários ':=^40}")
+        print(pd.DataFrame(self.usuarios.find({"cpf": self.cpf}, {"_id": 0})))
 
     # CHANGE REGISTERS
     def alterar_registro(self, cpf):
@@ -58,9 +55,7 @@ class Usuario:
     # VERIFY IF REGISTER EXIST ON DB
     def existe_registro(self, cpf) -> bool:
         dados = dict(cpf=cpf)
-        if self.usuarios.find(dados).count() > 0:
-            return True
-        return False
+        return self.usuarios.find(dados).count() > 0
 
     # CLEAN SPECIFIC REGISTER DB
     def deletar_registro(self, cpf):

@@ -8,14 +8,14 @@ def print_board(board):
     boardString = ""
     for i in range(9):
         for j in range(9):
-            boardString += str(board[i][j]) + " "
-            if (j + 1) % 3 == 0 and j != 0 and j + 1 != 9:
+            boardString += f"{str(board[i][j])} "
+            if (j + 1) % 3 == 0 and j != 0 and j != 8:
                 boardString += "| "
 
             if j == 8:
                 boardString += "\n"
 
-            if j == 8 and (i + 1) % 3 == 0 and i + 1 != 9:
+            if j == 8 and (i + 1) % 3 == 0 and i != 8:
                 boardString += "- - - - - - - - - - - \n"
     print(boardString)
 

@@ -66,8 +66,7 @@ try:
         digits = string.digits
         whole = lower + upper + digits
         hash_string = random.sample(whole, 8)
-        hash = "".join(hash_string)
-        return hash
+        return "".join(hash_string)
 
     # Check if a table exits, if not create one
     # We have the following columns in the table
@@ -167,8 +166,7 @@ try:
         console.print(
             "Are you sure you want to Drop the database? This will delete the whole table"
         )
-        confirmation = Confirm.ask("Are you sure")
-        if confirmation:
+        if confirmation := Confirm.ask("Are you sure"):
             cursor.execute("DROP table dbview;")
             console.print(
                 "Dropped Table dbview: Restart the application to start a new main table"

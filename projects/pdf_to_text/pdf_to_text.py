@@ -62,11 +62,8 @@ class PDFTextExtractorApp(QMainWindow):
             self.text_edit.setPlainText("No PDF file selected.")
 
     def extractTextFromPDF(self, pdf_path):
-        pdf_text = ""
         pdf_reader = PdfReader(pdf_path)
-        for page in pdf_reader.pages:
-            pdf_text += page.extract_text()
-        return pdf_text
+        return "".join(page.extract_text() for page in pdf_reader.pages)
 
 
 def main():

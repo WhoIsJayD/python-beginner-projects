@@ -4,12 +4,12 @@ def input_matrix():
     print(">>> Input order of matrix")
     row = int(input("Choose matrix rows and columns: "))
     column = row
-    print(f"Matrix A: {row}x{column}")
+    print(f"Matrix A: {column}x{column}")
     print("-" * 20)
 
     # Input elements of matrix A and B
     print(">>> Input elements of matrix")
-    for i in range(row):
+    for i in range(column):
         matrix.append([])
         for j in range(column):
             matrix[i].append(int(input(f"A {i + 1}, {j + 1}: ")))
@@ -31,12 +31,10 @@ def inverse_matrix(matrix):
         matrix_2.append([])
         for j in range(column):
             matrix_3 = []
-            iter = 0
-            for k in [x for x in range(column) if x != i]:
+            for iter, k in enumerate(x for x in range(column) if x != i):
                 matrix_3.append([])
                 for l_ in [y for y in range(column) if y != j]:
                     matrix_3[iter].append(matrix[k][l_])
-                iter += 1
             matrix_2[i].append(find_determinant(matrix_3))
 
     # Step 2: Generate the Matrix of Cofactors
@@ -69,12 +67,10 @@ def find_determinant(matrix):
         final_determinant = 0
         for i in range(column):
             matrix_2 = []
-            iter = 0
-            for j in [x for x in range(column) if x != 0]:
+            for iter, j in enumerate(x for x in range(column) if x != 0):
                 matrix_2.append([])
                 for k in [y for y in range(column) if y != i]:
                     matrix_2[iter].append(matrix[j][k])
-                iter += 1
             determinant = find_determinant(matrix_2)
             if (i % 2) == 0:
                 final_determinant += matrix[0][i] * determinant
@@ -89,8 +85,7 @@ def find_determinant(matrix):
         b = matrix[0][1]
         c = matrix[1][0]
         d = matrix[1][1]
-        determinant = (a * d) - (b * c)
-        return determinant
+        return (a * d) - (b * c)
 
 
 def print_matrix(matrix, text=""):

@@ -41,14 +41,7 @@ def computer_guess():
 
     # Continue the loop until the computer guesses the correct number
     while CompAns != "c":
-        if low != high:
-            # Generate a random guess within the current range
-            CompGuess = random.randint(low, high)
-        else:
-            CompGuess = (
-                low  # If the range is reduced to a single value, guess that number
-            )
-
+        CompGuess = random.randint(low, high) if low != high else low
         # Ask the user if the computer's guess is too high, too low, or correct
         CompAns = input(
             f"Is {CompGuess} too high (h), too low (l), or correct (c)? \n=>"
@@ -74,5 +67,5 @@ if __name__ == "__main__":
     # Call the appropriate function based on the selected gaming mode
     if Gmode == 1:
         guess()
-    if Gmode == 2:
+    elif Gmode == 2:
         computer_guess()

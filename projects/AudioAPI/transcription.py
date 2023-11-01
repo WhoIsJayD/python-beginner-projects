@@ -32,19 +32,18 @@ def transcribe():
     transcribe = model.transcribe(audio=filename)
     segments = transcribe["segments"]
 
-    srt_file = open("subtitles.vtt", "w", encoding="utf-8")
-    srt_file.write("WEBVTT\n\n")
+    with open("subtitles.vtt", "w", encoding="utf-8") as srt_file:
+        srt_file.write("WEBVTT\n\n")
 
-    for segment in segments:
-        startTime = str(0) + str(timedelta(seconds=int(segment["start"]))) + ".000"
-        endTime = str(0) + str(timedelta(seconds=int(segment["end"]))) + ".000"
-        text = segment["text"]
-        segmentId = segment["id"] + 1
-        segment = f"{segmentId}\n{startTime} --> {endTime}\n{text[1:] if text[0] == ' ' else text}\n\n"
+        for segment in segments:
+            startTime = str(0) + str(timedelta(seconds=int(segment["start"]))) + ".000"
+            endTime = str(0) + str(timedelta(seconds=int(segment["end"]))) + ".000"
+            text = segment["text"]
+            segmentId = segment["id"] + 1
+            segment = f"{segmentId}\n{startTime} --> {endTime}\n{text[1:] if text[0] == ' ' else text}\n\n"
 
-        srt_file.write(segment)
+            srt_file.write(segment)
 
-    srt_file.close()
     os.remove(filename)
 
     return send_file(

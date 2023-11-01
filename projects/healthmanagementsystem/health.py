@@ -11,36 +11,36 @@ def inputt(n):
         if d == 1:
             value = input("type here.. \n")
             with open("anu-exe.txt", "a") as op:
-                op.write(str([str(gettime())]) + ": " + value + "\n ")
+                op.write(f"{[str(gettime())]}: {value}" + "\n ")
             print("written successfully ")
         elif d == 2:
             value = input("type here.. \n")
             with open("anu-food.txt", "a") as op:
-                op.write(str([str(gettime())]) + ": " + value + "\n ")
+                op.write(f"{[str(gettime())]}: {value}" + "\n ")
             print("written successfully ")
     elif n == 2:
         d = int(input("Enter 1 for exercise and 2 for food :"))
         if d == 1:
             value = input("type here.. \n")
             with open("simon-exe.txt", "a") as op:
-                op.write(str([str(gettime())]) + ": " + value + "\n ")
+                op.write(f"{[str(gettime())]}: {value}" + "\n ")
             print("written successfully ")
         elif d == 2:
             value = input("type here.. \n")
             with open("simon-food.txt", "a") as op:
-                op.write(str([str(gettime())]) + ": " + value + "\n ")
+                op.write(f"{[str(gettime())]}: {value}" + "\n ")
             print("written successfully ")
     elif n == 3:
         d = int(input("Enter 1 for exercise and 2 for food :"))
         if d == 1:
             value = input("type here.. \n")
             with open("john-exe.txt", "a") as op:
-                op.write(str([str(gettime())]) + ": " + value + "\n ")
+                op.write(f"{[str(gettime())]}: {value}" + "\n ")
             print("written successfully ")
         elif d == 2:
             value = input("type here.. \n")
             with open("john-food.txt", "a") as op:
-                op.write(str([str(gettime())]) + ": " + value + "\n ")
+                op.write(f"{[str(gettime())]}: {value}" + "\n ")
             print("written successfully ")
     else:
         print("Enter the valid input 1(anu) 2(simon) 3(john)")
@@ -84,9 +84,8 @@ def retrieve(k):
 print("health management system: ")
 a = int(input("Press 1 for log the value and 2 for retrieve "))
 
+b = int(input("Press 1 for anu 2 for simon 3 for john "))
 if a == 1:
-    b = int(input("Press 1 for anu 2 for simon 3 for john "))
     inputt(b)
 else:
-    b = int(input("Press 1 for anu 2 for simon 3 for john "))
     retrieve(b)

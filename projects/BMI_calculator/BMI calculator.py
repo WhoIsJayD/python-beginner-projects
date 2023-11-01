@@ -10,8 +10,7 @@ def calculate_bmi(height, weight):
         float: Calculated BMI.
     """
     try:
-        bmi = round(weight / (height**2), 2)
-        return bmi
+        return round(weight / (height**2), 2)
     except ZeroDivisionError:
         return None
 

@@ -6,8 +6,6 @@ import os
 # Initialize a session for consistent parameters across requests
 s = requests.session()
 
-# Initialize lists to store data
-films = []
 names = []
 ratings = []
 genres = []
@@ -19,11 +17,7 @@ path = input("Enter the path where your films are: ")
 # Retrieve and store names of all files in the directory
 filmswe = os.listdir(path)
 
-# Remove file extensions from each film name and store in 'films' list
-for film in filmswe:
-    films.append(os.path.splitext(film)[0])
-    # print(os.path.splitext(film)[0])
-
+films = [os.path.splitext(film)[0] for film in filmswe]
 # Now for every film in our 'films' list
 for line in films:
     # x = line.split(", ")
@@ -34,7 +28,7 @@ for line in films:
     query = "+".join(title.split())
 
     # Create URL for IMDB search
-    URL = "https://www.imdb.com/search/title/?title=" + query
+    URL = f"https://www.imdb.com/search/title/?title={query}"
     print(URL)
     # print(release)
 

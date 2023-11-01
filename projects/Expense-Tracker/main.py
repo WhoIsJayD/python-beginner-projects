@@ -43,7 +43,7 @@ def add_expense():
         conn.commit()
         print("Expense added successfully.")
     except Exception as e:
-        print("Error adding expense: {}".format(e))
+        print(f"Error adding expense: {e}")
 
 
 def delete_expense():
@@ -60,7 +60,7 @@ def delete_expense():
             conn.commit()
             print("Expense deleted successfully.")
         except Exception as e:
-            print("Error deleting expense: {}".format(e))
+            print(f"Error deleting expense: {e}")
 
 
 def update_expense():
@@ -79,20 +79,19 @@ def update_expense():
             conn.commit()
             print("Expense updated successfully.")
         except Exception as e:
-            print("Error updating expense: {}".format(e))
+            print(f"Error updating expense: {e}")
 
 
 def view_expenses():
-    # Fetch and display expenses
-    expenses = conn.execute(select_expenses_sql).fetchall()
-    if not expenses:
-        print("No expenses recorded yet.")
-    else:
+    if expenses := conn.execute(select_expenses_sql).fetchall():
         print("Expenses:")
         for expense in expenses:
             print(
                 f"ID: {expense[0]}, Date: {expense[1]}, Description: {expense[2]}, Amount: Rs: {expense[3]}"
             )
+
+    else:
+        print("No expenses recorded yet.")
 
 
 def total_expenses():
@@ -173,16 +172,15 @@ def data_filter():
     select_expenses_sql = (
         f"SELECT * FROM expenses WHERE {filter_condition} ORDER BY date;"
     )
-    expenses = conn.execute(select_expenses_sql).fetchall()
-
-    if not expenses:
-        print("No expenses recorded based on the selected filter.")
-    else:
+    if expenses := conn.execute(select_expenses_sql).fetchall():
         print("Filtered Expenses:")
         for expense in expenses:
             print(
                 f"ID: {expense[0]}, Date: {expense[1]}, Description: {expense[2]}, Amount: Rs: {expense[3]}"
             )
+
+    else:
+        print("No expenses recorded based on the selected filter.")
 
 
 def data_filter():
@@ -237,16 +235,15 @@ def data_filter():
     select_expenses_sql = (
         f"SELECT * FROM expenses WHERE {filter_condition} ORDER BY date;"
     )
-    expenses = conn.execute(select_expenses_sql).fetchall()
-
-    if not expenses:
-        print("No expenses recorded based on the selected filter.")
-    else:
+    if expenses := conn.execute(select_expenses_sql).fetchall():
         print("Filtered Expenses:")
         for expense in expenses:
             print(
                 f"ID: {expense[0]}, Date: {expense[1]}, Description: {expense[2]}, Amount: Rs: {expense[3]}"
             )
+
+    else:
+        print("No expenses recorded based on the selected filter.")
 
 
 # defined this funtion to check is database is empty or not

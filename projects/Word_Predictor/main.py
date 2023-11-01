@@ -29,9 +29,7 @@ class WhatsAppChat:
     def read_chat_file(self, filename):
         """Reads in a WhatsApp chat text file and returns a list of titles."""
         chat_df = pd.read_fwf(filename, header=None)
-        # Extract the chat titles from the DataFrame and return them as a list
-        titles = [title for title in chat_df[2]]
-        return titles
+        return list(chat_df[2])
 
     def count_word_frequency(self):
         """Counts the frequency of each word in a list of titles."""
@@ -40,15 +38,11 @@ class WhatsAppChat:
             # Split each title into words and count their frequency
             for word in str(title).split():
                 if len(word) > 1:
-                    if word in word_freq_dict.keys():
+                    if word in word_freq_dict:
                         word_freq_dict[word] += 1
                     else:
                         word_freq_dict[word] = 1
-        # Sort the word frequency dictionary by value in descending order and return it
-        sorted_word_freq_dict = dict(
-            sorted(word_freq_dict.items(), key=lambda x: -1 * int(x[1]))
-        )
-        return sorted_word_freq_dict
+        return dict(sorted(word_freq_dict.items(), key=lambda x: -1 * int(x[1])))
 
     def find_next_words(self):
         """Finds the most common next word for each word in a list of titles."""
@@ -85,9 +79,7 @@ class NextWordPredictor:
             sorted_next_words = sorted(
                 next_word_freq_dict.items(), key=lambda x: x[1], reverse=True
             )
-            # Get the top num_predictions words and return them
-            next_words = [word[0] for word in sorted_next_words[: self.num_predictions]]
-            return next_words
+            return [word[0] for word in sorted_next_words[: self.num_predictions]]
         else:
             # If the current word is not in the dictionary of next words, return None
             return None

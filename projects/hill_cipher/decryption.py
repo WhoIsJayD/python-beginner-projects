@@ -7,20 +7,14 @@ cur.execute("use password_manager")
 
 # to perform the modulus operation
 def mod(num):
-    if num < 0:
-        result = 26 - (abs(num) % 26)
-    else:
-        result = num % 26
-    return result
+    return 26 - (abs(num) % 26) if num < 0 else num % 26
 
 
 def hill_cipher(text, key_matrix):
-    cipher_text = []
     sum = 0
     for i in range(3):
         sum += (text[i] - 1) * key_matrix[i]
-    cipher_text.append(sum)
-
+    cipher_text = [sum]
     sum = 0
     for i in range(3, 6):
         sum += (text[i - 3] - 1) * key_matrix[i]
@@ -35,15 +29,12 @@ def hill_cipher(text, key_matrix):
 
 def message(actual_text):
     HillCipherText = " "
-    sect = []
     matrix = []
-    for i in range(3):
-        sect.append(actual_text[i])
+    sect = [actual_text[i] for i in range(3)]
     for i in range(3):
         cur.execute(f"select lid from loalpha where lchar = '{sect[i]}'")
         l = cur.fetchone()
-        for i in l:
-            matrix.append(i)
+        matrix.extend(iter(l))
     l = [4, 15, 24, 9, 17, 0, 15, 6, 17]
     h = hill_cipher(matrix, l)
 

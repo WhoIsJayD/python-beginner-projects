@@ -90,22 +90,23 @@ class TileMatchingGame:
                 self.attempts_label.config(text=f"Attempts: {self.attempts}")
 
     def check_matching_tiles(self):
-        if len(self.selected_tiles) == 2:
-            tile1 = self.selected_tiles[0]
-            tile2 = self.selected_tiles[1]
-            if (
-                self.tile_colors[tile1[0] * self.columns + tile1[1]]
-                == self.tile_colors[tile2[0] * self.columns + tile2[1]]
-            ):
-                self.score += 1
-                self.score_label.config(text=f"Score: {self.score}")
-                if self.score == self.rows * self.columns // 2:
-                    self.end_game()
+        if len(self.selected_tiles) != 2:
+            return
+        tile1 = self.selected_tiles[0]
+        tile2 = self.selected_tiles[1]
+        if (
+            self.tile_colors[tile1[0] * self.columns + tile1[1]]
+            == self.tile_colors[tile2[0] * self.columns + tile2[1]]
+        ):
+            self.score += 1
+            self.score_label.config(text=f"Score: {self.score}")
+            if self.score == self.rows * self.columns // 2:
+                self.end_game()
 
-            else:
-                self.tiles[tile1[0]][tile1[1]].config(text="", bg="gray")
-                self.tiles[tile2[0]][tile2[1]].config(text="", bg="gray")
-            self.selected_tiles = []
+        else:
+            self.tiles[tile1[0]][tile1[1]].config(text="", bg="gray")
+            self.tiles[tile2[0]][tile2[1]].config(text="", bg="gray")
+        self.selected_tiles = []
 
     def end_game(self):
         self.timer_label.config(text="Game Over!")

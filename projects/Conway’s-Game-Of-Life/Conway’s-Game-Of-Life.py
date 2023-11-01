@@ -78,9 +78,8 @@ def update(frameNum, img, grid, N):
             if grid[i, j] == ON:
                 if (total < 2) or (total > 3):
                     newGrid[i, j] = OFF
-            else:
-                if total == 3:
-                    newGrid[i, j] = ON
+            elif total == 3:
+                newGrid[i, j] = ON
 
     # update data
     img.set_data(newGrid)
@@ -105,25 +104,17 @@ def main():
     parser.add_argument("--gosper", action="store_true", required=False)
     args = parser.parse_args()
 
-    # set grid size
-    N = 100
-    if args.N and int(args.N) > 8:
-        N = int(args.N)
-
-    # set animation update interval
-    updateInterval = 50
-    if args.interval:
-        updateInterval = int(args.interval)
-
+    N = int(args.N) if args.N and int(args.N) > 8 else 100
+    updateInterval = int(args.interval) if args.interval else 50
     # declare grid
     grid = np.array([])
 
     # check if "glider" demo flag is specified
     if args.glider:
-        grid = np.zeros(N * N).reshape(N, N)
+        grid = np.zeros(N**2).reshape(N, N)
         addGlider(1, 1, grid)
     elif args.gosper:
-        grid = np.zeros(N * N).reshape(N, N)
+        grid = np.zeros(N**2).reshape(N, N)
         addGosperGliderGun(10, 10, grid)
 
     else:  # populate grid with random on/off -

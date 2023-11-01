@@ -31,7 +31,7 @@ class TextEditor:
             self.filename = self.file.name
             self.text.insert(INSERT, content)
             self.filename_only = self.filename.split("/")[-1]
-            self.root.title(self.filename_only + "-TryCatch Text Editor")
+            self.root.title(f"{self.filename_only}-TryCatch Text Editor")
 
     def save_file(self):
         if self.filename != None and self.file != None:
@@ -48,7 +48,7 @@ class TextEditor:
             f = open(self.filename, "r+")
             f.write(self.text_data)
             self.filename_only = self.filename.split("/")[-1]
-            self.root.title(self.filename_only + "-TryCatch Text Editor")
+            self.root.title(f"{self.filename_only}-TryCatch Text Editor")
 
     def save_as_file(self):
         self.file = asksaveasfile()
@@ -57,7 +57,7 @@ class TextEditor:
         f = open(self.filename, "r+")
         f.write(self.text_data)
         self.filename_only = self.filename.split("/")[-1]
-        self.root.title(self.filename_only + "-TryCatch Text Editor")
+        self.root.title(f"{self.filename_only}-TryCatch Text Editor")
 
     def close_file(self):
         self.text.delete(1.0, "end-1c")

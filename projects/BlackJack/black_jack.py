@@ -44,16 +44,14 @@ class Card:
         self.value = values[rank]
 
     def __str__(self):
-        return self.rank + " of " + self.suit
+        return f"{self.rank} of {self.suit}"
 
 
 class Deck:
     def __init__(self):
         self.all_cards = []
         for suit in suits:
-            for rank in ranks:
-                # This assumes the Card class has already been defined!
-                self.all_cards.append(Card(suit, rank))
+            self.all_cards.extend(Card(suit, rank) for rank in ranks)
 
     def shuffle(self):
         random.shuffle(self.all_cards)
@@ -83,7 +81,6 @@ def check_ace(card):
                 break
             else:
                 print("choose valid value.")
-                continue
 
 
 print("\n" * 100)  # clears up the terminal for a cleaner look
@@ -146,9 +143,9 @@ while game_on:
         dealer_table_cards = []
 
         # using list comprehension to distribute 2 cards
-        [player_table_cards.append(new_deck.deal_one()) for i in range(2)]
+        [player_table_cards.append(new_deck.deal_one()) for _ in range(2)]
         # to both user and dealer(computer)
-        [dealer_table_cards.append(new_deck.deal_one()) for i in range(2)]
+        [dealer_table_cards.append(new_deck.deal_one()) for _ in range(2)]
 
         print(f"\nPlayer cards are {player_table_cards[0]} and {player_table_cards[1]}")
         print(f"Dealer cards are {dealer_table_cards[0]} and Hidden.")
@@ -171,11 +168,7 @@ while game_on:
                 [print(i) for i in player_table_cards]
                 print()
 
-                player_cards_val = 0
-
-                for i in player_table_cards:
-                    player_cards_val += i.value
-
+                player_cards_val = sum(i.value for i in player_table_cards)
                 if player_cards_val == 21:
                     print("You got a blackjack!")
                     break
@@ -188,10 +181,7 @@ while game_on:
                     break
 
             elif hit_or_stand == "stand":
-                player_cards_val = 0
-                for i in player_table_cards:
-                    player_cards_val += i.value
-
+                player_cards_val = sum(i.value for i in player_table_cards)
                 print("\nPlayer has decided to stand.")
 
                 print("\nPlayer's hand:")
@@ -212,11 +202,7 @@ while game_on:
         no_of_hits = 0
 
         while True:
-            dealer_cards_val = 0
-
-            for i in dealer_table_cards:  # updating value of dealer's cards
-                dealer_cards_val += i.value
-
+            dealer_cards_val = sum(i.value for i in dealer_table_cards)
             if dealer_cards_val < 17:
                 no_of_hits += 1
                 dealer_table_cards.append(new_deck.deal_one())
@@ -237,15 +223,12 @@ while game_on:
 
             elif dealer_cards_val > 21:
                 # checking if player has also busted or not. If player busts , dealer's bust doesn't count.
-                if not (player_cards_val > 21):
+                if player_cards_val <= 21:
                     print(f"The Dealer has hit {no_of_hits} times.")
                     print("The Dealer busted!")
                     print("\nDealer's hand :")
                     [print(i) for i in dealer_table_cards]
-                    break
-
-                else:
-                    break
+                break
 
         # checking for busts first
         if player_cards_val > 21:

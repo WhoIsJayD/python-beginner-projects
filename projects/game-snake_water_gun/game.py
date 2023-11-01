@@ -16,13 +16,10 @@ ready = input(
 totalchances = 3
 user_score = 0
 computer_score = 0
-gameno = 0
-
 lst = ["s", "w", "g"]
 print("[ s ] - Snake\n[ w ] - Water\n[ g ] - Gun\n")
 
-while gameno < totalchances:
-    gameno = gameno + 1
+for gameno in range(1, totalchances + 1):
     print(f"=========Game {gameno} is starting=========")
 
     user = input("CHOOSE WISELY:= ")
@@ -98,17 +95,14 @@ print(
 print(
     f"Your Total Score is : {user_score} and Computer's Total Score is : {computer_score}"
 )
+print(
+    "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-"
+)
 if user_score > computer_score:
-    print(
-        "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-"
-    )
     print(
         "Hurrey!!! You Won the Series\nHere is a gift for you.... ❤❤❤🎂🎂🎂\nSee you next time.Bye......"
     )
 else:
-    print(
-        "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-"
-    )
     print(
         "Sorry!!! You lose the series\nDon't worry you'll still get a gift.... 😝LOL😝 Come next time "
     )

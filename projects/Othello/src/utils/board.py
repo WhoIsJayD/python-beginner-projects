@@ -149,9 +149,7 @@ class Board:
         possibleBlackMoves = self.all_legal_moves(Board.BLACK)
         possibleWhiteMoves = self.all_legal_moves(Board.WHITE)
 
-        if not possibleBlackMoves or not possibleWhiteMoves:
-            return False
-        return True
+        return bool(possibleBlackMoves and possibleWhiteMoves)
 
     def evaluate_board(self) -> int:
         """Evaluate the board as per various heuristics."""

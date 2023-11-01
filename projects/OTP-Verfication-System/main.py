@@ -4,13 +4,8 @@ import random
 import smtplib
 
 digits = "0123456789"
-OTP = ""
-
-# random generation for opt code
-for i in range(6):
-    OTP += digits[math.floor(random.random() * 10)]
-
-otp = OTP + " is your OTP"
+OTP = "".join(digits[math.floor(random.random() * 10)] for _ in range(6))
+otp = f"{OTP} is your OTP"
 msg = otp
 
 s = smtplib.SMTP("smtp.gmail.com", 587)

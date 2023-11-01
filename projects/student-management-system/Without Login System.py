@@ -47,7 +47,7 @@ def add_student():
         + var5
         + "')"
     )
-    mycursor.execute("select * from studentsinfo where Sch_no=('" + var1 + "')")
+    mycursor.execute(f"select * from studentsinfo where Sch_no=('{var1}')")
     result = mycursor.fetchall()
     print(
         tabulate(
@@ -80,7 +80,7 @@ def search_student():
     print("--- Search Student ---")
     print("------------------------")
     a = input("Enter the sch no. of the student:")
-    mycursor.execute("select * from studentsinfo where Sch_no=('" + a + "')")
+    mycursor.execute(f"select * from studentsinfo where Sch_no=('{a}')")
     result = mycursor.fetchall()
     if len(result) == 0:
         print("Enter valid sch no.!")
@@ -118,7 +118,7 @@ def update_student():
         + var5
         + "')"
     )
-    mycursor.execute("select * from studentsinfo where Sch_no=('" + var1 + "')")
+    mycursor.execute(f"select * from studentsinfo where Sch_no=('{var1}')")
     result = mycursor.fetchall()
     if len(result) == 0:
         print("Enter valid sch no.!")
@@ -141,8 +141,8 @@ def delete_student():
     print("--- Delete Student ---")
     print("------------------------")
     var1 = input("Enter the sch no. of the student:")
-    mycursor.execute("delete from studentsinfo where sch_no=('" + var1 + "')")
-    mycursor.execute("select * from studentsinfo where Sch_no=('" + var1 + "')")
+    mycursor.execute(f"delete from studentsinfo where sch_no=('{var1}')")
+    mycursor.execute(f"select * from studentsinfo where Sch_no=('{var1}')")
     result = mycursor.fetchall()
     if len(result) == 0:
         print("Data deleted successfully!")

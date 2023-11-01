@@ -26,7 +26,7 @@ def movie(request):
 
     if response.status_code == 200:
         data = response.json()
-        results = data.get("results", [])[0:5]
+        results = data.get("results", [])[:5]
         for i in range(5):
             Ob = results[i]["title"]
             image_url = results[i]["image"]["url"]

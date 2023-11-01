@@ -11,5 +11,5 @@ print(
     + Back.BLUE
     + "I love open-source contribution"
 )
-print(Back.CYAN + "Hi, My name is Nowshin")
+print(f"{Back.CYAN}Hi, My name is Nowshin")
 print(Fore.RED + Back.GREEN + "Hi My name is Nowshin")

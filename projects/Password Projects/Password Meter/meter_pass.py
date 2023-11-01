@@ -10,8 +10,7 @@ controller = False
 
 # METHODS VERIFY IF PASS IS STRONG
 def numberOfCharacters(password):
-    bonus = len(password) * 4
-    return bonus
+    return len(password) * 4
 
 
 def upperCaseLetters(password):
@@ -48,28 +47,31 @@ def numbers(password):
 
 
 def symbols(password):
-    charsSymbol = 0
-    for i in password:
+    charsSymbol = sum(
+        1
+        for i in password
         if (
             i.lower() not in sequenceAlphabet
             and i not in exceptions
             and i not in sequenceNumbers
-        ):
-            charsSymbol += 1
+        )
+    )
     return charsSymbol * 6
 
 
 def middleNumberOrSymbol(password):
-    CharsMiddle = 0
-    for i in range(1, len(password)):
+    CharsMiddle = sum(
+        1
+        for i in range(1, len(password))
         if (
             password[i].isdigit()
             or (
                 password[i].lower() not in sequenceAlphabet
                 and password[i] not in exceptions
             )
-        ) and i != len(password) - 1:
-            CharsMiddle += 1
+        )
+        and i != len(password) - 1
+    )
     return CharsMiddle * 2
 
 
@@ -92,7 +94,7 @@ def requirements(password):
             requirementsCount += 1
 
         if requirementsCount == 4:
-            requirementsCount = requirementsCount * 2
+            requirementsCount *= 2
         else:
             requirementsCount = 0
 
@@ -100,27 +102,13 @@ def requirements(password):
 
 
 def lettersOnly(password):
-    countDigit = 0
-
-    for i in password:
-        if i.isdigit():
-            countDigit += 1
-
-    if countDigit == 0:
-        countDigit = len(password) * -1
-    else:
-        countDigit = 0
-
+    countDigit = sum(1 for i in password if i.isdigit())
+    countDigit = len(password) * -1 if countDigit == 0 else 0
     return countDigit
 
 
 def numbersOnly(password):
-    countLetters = 0
-
-    for i in password:
-        if i.isalpha():
-            countLetters += 1
-
+    countLetters = sum(1 for i in password if i.isalpha())
     if countLetters == 0:
         return len(password) * -1
     else:
@@ -130,40 +118,40 @@ def numbersOnly(password):
 
 
 def consecutiveLowerCase(password):
-    countLowerCase = 0
-    password = password + "1"
+    password = f"{password}1"
 
-    for i in range(len(password)):
+    countLowerCase = sum(
+        1
+        for i in range(len(password))
         if (
             password[i].islower()
             and password[i + 1].islower()
             and password[i + 1] not in acentos
             and password[i] not in acentos
-        ):
-            countLowerCase += 1
-
+        )
+    )
     return (countLowerCase * 2) * -1
 
 
 def consecutiveUpperCase(password):
-    countUpperCase = 0
-    password = password + "1"
+    password = f"{password}1"
 
-    for i in range(len(password)):
-        if password[i].isupper() and password[i + 1].isupper():
-            countUpperCase += 1
-
+    countUpperCase = sum(
+        1
+        for i in range(len(password))
+        if password[i].isupper() and password[i + 1].isupper()
+    )
     return (countUpperCase * 2) * -1
 
 
 def consecutiveNumbers(password):
-    countNumbers = 0
-    password = password + "a"
+    password = f"{password}a"
 
-    for i in range(len(password)):
-        if password[i].isdigit() and password[i + 1].isdigit():
-            countNumbers += 1
-
+    countNumbers = sum(
+        1
+        for i in range(len(password))
+        if password[i].isdigit() and password[i + 1].isdigit()
+    )
     return (countNumbers * 2) * -1
 
 

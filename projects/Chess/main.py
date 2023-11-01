@@ -131,9 +131,7 @@ class ValidMoveGenerator(object):
                 if not self.sameColor(x + i, y + i, grid):
                     self.vMoves.append([x + i, y + i])
                     break
-                break
-            else:
-                break
+            break
         for i in range(1, 8):
             if (x - i >= 0) and (y - i >= 0):
                 if grid[x - i][y - i] == 0:
@@ -142,9 +140,7 @@ class ValidMoveGenerator(object):
                 if not self.sameColor(x - i, y - i, grid):
                     self.vMoves.append([x - i, y - i])
                     break
-                break
-            else:
-                break
+            break
         for i in range(1, 8):
             if (x + i < 8) and (y - i >= 0):
                 if grid[x + i][y - i] == 0:
@@ -153,9 +149,7 @@ class ValidMoveGenerator(object):
                 if not self.sameColor(x + i, y - i, grid):
                     self.vMoves.append([x + i, y - i])
                     break
-                break
-            else:
-                break
+            break
         for i in range(1, 8):
             if (x - i >= 0) and (y + i < 8):
                 if grid[x - i][y + i] == 0:
@@ -164,10 +158,7 @@ class ValidMoveGenerator(object):
                 if not self.sameColor(x - i, y + i, grid):
                     self.vMoves.append([x - i, y + i])
                     break
-                break
-            else:
-                break
-
+            break
         return self.vMoves
 
     def Knight(self, x, y, grid):
@@ -273,10 +264,7 @@ class ValidMoveGenerator(object):
         return self.vMoves2
 
     def sameColor(self, x, y, grid):
-        if self.white:
-            return grid[x][y].isupper()
-        else:
-            return grid[x][y].islower()
+        return grid[x][y].isupper() if self.white else grid[x][y].islower()
 
 
 validMoveGen = ValidMoveGenerator()
@@ -505,10 +493,7 @@ class Board(object):
     def resetColor(self):
         for i in range(8):
             for j in range(8):
-                if i % 2 == j % 2:
-                    self.colors[i][j] = (200, 200, 200)
-                else:
-                    self.colors[i][j] = (30, 30, 30)
+                self.colors[i][j] = (200, 200, 200) if i % 2 == j % 2 else (30, 30, 30)
 
 
 board = Board()
@@ -530,28 +515,24 @@ def notResultsInCheck(x1, y1, x2, y2):
 
     for i in range(8):
         for j in range(8):
-            if white:
-                if grid2[i][j] == "K":
-                    kingX = i
-                    kingY = j
-            else:
-                if grid2[i][j] == "k":
-                    kingX = i
-                    kingY = j
+            if (
+                white
+                and grid2[i][j] == "K"
+                or not white
+                and grid2[i][j] == "k"
+            ):
+                kingX = i
+                kingY = j
             if grid2[i][j] != 0:
                 if white:
                     if grid2[i][j].islower():
                         pos.append([i, j])
-                else:
-                    if grid2[i][j].isupper():
-                        pos.append([i, j])
+                elif grid2[i][j].isupper():
+                    pos.append([i, j])
 
-    vMoves = []
-    for i in range(len(pos)):
-        vMoves.append(validMoveGen.generateValidMoves(pos[i][0], pos[i][1], grid2))
-
-    for i in range(len(vMoves)):
-        i1 = vMoves[i]
+    vMoves = [validMoveGen.generateValidMoves(po[0], po[1], grid2) for po in pos]
+    for vMove in vMoves:
+        i1 = vMove
         for j in range(len(i1)):
             j1 = i1[j]
             if kingX == j1[0] and kingY == j1[1]:
@@ -574,15 +555,18 @@ class Event(object):
             self.moveX = i
             self.moveY = j
             if (
-                (
-                    self.selectX != None
-                    and self.selectY != None
-                    and self.moveX != None
-                    and self.moveY != None
-                )
-                and self.selectX != self.moveX
-                or self.selectY != self.moveY
-            ):
+                self.selectX is None
+                or self.selectY is None
+                or self.moveX is None
+                or self.moveY is None
+                or self.selectX == self.moveX
+            ) and self.selectY == self.moveY:
+                self.selectX = None
+                self.selectY = None
+                self.moveX = None
+                self.moveY = None
+                board.resetColor()
+            else:
                 if notResultsInCheck(
                     self.selectX, self.selectY, self.moveX, self.moveY
                 ):
@@ -593,25 +577,18 @@ class Event(object):
                     self.moveX = None
                     self.moveY = None
                 board.colorBoard()
-            else:
-                self.selectX = None
-                self.selectY = None
-                self.moveX = None
-                self.moveY = None
-                board.resetColor()
             board.colorBoard()
             self.selected = False
+        elif grid[i][j] != 0 and self.turnCheck(i, j):
+            self.selected = True
+            self.selectX = i
+            self.selectY = j
+            board.colorValidMoves(self.selectX, self.selectY)
+            board.colorBoard()
         else:
-            if grid[i][j] != 0 and self.turnCheck(i, j):
-                self.selected = True
-                self.selectX = i
-                self.selectY = j
-                board.colorValidMoves(self.selectX, self.selectY)
-                board.colorBoard()
-            else:
-                self.selected = False
-                self.selectX = None
-                self.selectY = None
+            self.selected = False
+            self.selectX = None
+            self.selectY = None
 
     def turnCheck(self, i, j):
         global grid

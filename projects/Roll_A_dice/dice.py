@@ -13,7 +13,7 @@ mydb = mysql.connector.connect(
 mycursor = mydb.cursor()
 
 name = input("Your name: ")
-print("Hey " + name + "! Welcome to Roll A Dice game🎲 ")
+print(f"Hey {name}! Welcome to Roll A Dice game🎲 ")
 print(
     """Rules: 
 1. You have to roll a dice. 
@@ -75,7 +75,7 @@ if n == 1:
          What has two banks but no money🤔?"""
         )
         ans = input("Your ans: ")
-        if ans == "River bank" or ans == "river bank":
+        if ans in ["River bank", "river bank"]:
             print("Viola! You are right")
         else:
             print("Oops! You are wrong! The correct answer is River bank")
@@ -86,7 +86,7 @@ if n == 1:
         Name the six continents of the World"""
         )
         list = []
-        for i in range(0, 6):
+        for _ in range(0, 6):
             ans = input("Enter element: ")
             list.append(ans)
         print("You entered: ", list)

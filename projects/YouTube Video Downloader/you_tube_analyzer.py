@@ -63,10 +63,10 @@ def channel():
     # Create a Channel object for the provided channel URL
     channel = Channel(channel_link)
     # Display basic information about the channel
-    print("Channel ID: " + channel.channel_id)
-    print("Channel Name: " + channel.channel_name)
+    print(f"Channel ID: {channel.channel_id}")
+    print(f"Channel Name: {channel.channel_name}")
     # Get the number of videos in the channel and display it
-    print("No. of videos in the channel: " + str(len(channel.video_urls)))
+    print(f"No. of videos in the channel: {len(channel.video_urls)}")
 
 
 # Function to perform a YouTube search and display results

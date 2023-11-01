@@ -23,10 +23,10 @@ data.index
 
 len(data.index)
 
-news = []
-for row in range(0, len(data.index)):
-    news.append(" ".join(str(x) for x in data.iloc[row, 2:27]))
-
+news = [
+    " ".join(str(x) for x in data.iloc[row, 2:27])
+    for row in range(0, len(data.index))
+]
 type(news)
 
 news[0]

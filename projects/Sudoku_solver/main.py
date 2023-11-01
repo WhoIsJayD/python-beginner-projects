@@ -3,7 +3,7 @@ from random import sample
 
 def generate_board(num):
     base = 3
-    side = base * base
+    side = base**2
 
     def pattern(r, c):
         return (base * (r % base) + r // base + c) % side
@@ -15,7 +15,7 @@ def generate_board(num):
     rBase = range(base)
     rows = [g * base + r for g in shuffle(rBase) for r in shuffle(rBase)]
     cols = [g * base + c for g in shuffle(rBase) for c in shuffle(rBase)]
-    nums = shuffle(range(1, base * base + 1))
+    nums = shuffle(range(1, base**2 + 1))
 
     # randomized baseline
     board_tmp = [[nums[pattern(r, c)] for c in cols] for r in rows]
@@ -26,12 +26,7 @@ def generate_board(num):
 
     # remove numbers of the board
     squares = side * side
-    if num == 0:
-        # default number of empty slots
-        empties = squares * 3 // 4
-    else:
-        # given number of empty slots
-        empties = 81 - num
+    empties = squares * 3 // 4 if num == 0 else 81 - num
     # looping a randomized board for the amount of empty mubers
     for p in sample(range(squares), empties):
         # set nubers to 0 of the randomized board
@@ -78,7 +73,7 @@ def print_board(bo):
                 print(bo[i][j])
             else:
                 # printing each character with spaces
-                print(str(bo[i][j]) + " ", end="")
+                print(f"{str(bo[i][j])} ", end="")
     print("")
 
 
@@ -119,13 +114,11 @@ def next_empty(bo):
 
 
 def solve(bo):
-    # searching for next empty solt
-    slot = next_empty(bo)
-    if not slot:
+    if slot := next_empty(bo):
+        row, col = slot
+    else:
         # return True if there is no empty slot
         return True
-    else:
-        row, col = slot
     # looping number 1 to 9
     for i in range(1, 10):
         # check if the number is possible in this location

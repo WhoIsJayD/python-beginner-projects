@@ -19,12 +19,12 @@ def decoder(image):
 
         barcodeData = obj.data.decode("utf-8")
         barcodeType = obj.type
-        string = "Data " + str(barcodeData) + " | Type " + str(barcodeType)
+        string = f"Data {str(barcodeData)} | Type {str(barcodeType)}"
 
         cv2.putText(
             frame, string, (x, y), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 0, 0), 2
         )
-        print("Barcode: " + barcodeData + " | Type: " + barcodeType)
+        print(f"Barcode: {barcodeData} | Type: {barcodeType}")
 
 
 # Getting user's choice of usage

@@ -29,8 +29,7 @@ memory = ConversationBufferMemory(memory_key="chat_history", return_messages=Tru
 def originalText(docs):
     text = str(docs)
     regex = r"(Document)|(page_content=)|(metadata={'source':)|('page': \d})\)|(\\n)"
-    text = re.sub(regex, "", text)
-    return text
+    return re.sub(regex, "", text)
 
 
 text = originalText(docs)
@@ -54,8 +53,7 @@ def QA(query):
     query = "What is prompt engineering?"
     result = qa({"question": query})
     result = str(result["chat_history"][1])
-    result = result.split("content='")[1]
-    return result
+    return result.split("content='")[1]
 
 
 print("INSTRUCTIONS:")

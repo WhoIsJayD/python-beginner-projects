@@ -34,10 +34,10 @@ def game1_chooser():  # player choosing the word for hangman
         if flag == 0:
             count += 1
         if count == 7 and "*" in ans:  # end game after 7 guesses
-            mes = "You lost...The word is " + word + ":" + str(count)
+            mes = f"You lost...The word is {word}:{str(count)}"
             close = 1
         elif count < 7 and "*" not in ans:  # end game if all characters guessed
-            mes = "You won...The word is " + word + ":" + str(count)
+            mes = f"You won...The word is {word}:{str(count)}"
             close = 1
         else:
             mes = "".join(ans) + ":" + str(count)
@@ -73,9 +73,7 @@ def game2():  # Rock, paper, scissor game
         if mes == "Play":
             print(mes)
             inp = input().upper()
-            while (
-                inp != "ROCK" and inp != "PAPER" and inp != "SCISSOR"
-            ):  # retry if wrong input
+            while inp not in ["ROCK", "PAPER", "SCISSOR"]:  # retry if wrong input
                 inp = input("Choose between rock, paper or scissor\n").upper()
             clientSocket.send(inp.encode())  # send choice to server
             rps_score = clientSocket.recv(2048).decode()  # receive score from server

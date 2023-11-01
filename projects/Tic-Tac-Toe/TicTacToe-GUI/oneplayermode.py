@@ -41,23 +41,23 @@ def tictactoe(a):
     if a in r:
         print("ENTRY ALREADY EXISTS")
         return firstinitialiser()
-    if a == 1 and a not in r:
+    if a == 1:
         r1[0] = m
-    elif a == 2 and a not in r:
+    elif a == 2:
         r1[1] = m
-    elif a == 3 and a not in r:
+    elif a == 3:
         r1[2] = m
-    elif a == 4 and a not in r:
+    elif a == 4:
         r2[0] = m
-    elif a == 5 and a not in r:
+    elif a == 5:
         r2[1] = m
-    elif a == 6 and a not in r:
+    elif a == 6:
         r2[2] = m
-    elif a == 7 and a not in r:
+    elif a == 7:
         r3[0] = m
-    elif a == 8 and a not in r:
+    elif a == 8:
         r3[1] = m
-    elif a == 9 and a not in r:
+    elif a == 9:
         r3[2] = m
     r.append(n1)
     print(" | ".join(r1))
@@ -292,24 +292,25 @@ def compPLAY():
     oppwinCHECKER()
 
     def strategy1():
-        if r1[0] == "" and r3[2] == "" or c != []:
-            if r1[0] == "":
-                r1[0] = n
-                print("strategy 1 has worked")
-                c.append(1)
-                compCOMPLETER(1)
-            if r1[0] == n and r3[2] == n:
-                if r1[2] == "":
-                    r1[2] = n
-                    compCOMPLETER(3)
-                elif r3[0] == "":
-                    r3[0] = n
-                    compCOMPLETER(7)
-            elif r3[2] == "":
-                r3[2] = n
-                print("strategy1 has worked")
-                c.append(1)
-                compCOMPLETER(9)
+        if (r1[0] != "" or r3[2] != "") and c == []:
+            return
+        if r1[0] == "":
+            r1[0] = n
+            print("strategy 1 has worked")
+            c.append(1)
+            compCOMPLETER(1)
+        if r1[0] == n and r3[2] == n:
+            if r1[2] == "":
+                r1[2] = n
+                compCOMPLETER(3)
+            elif r3[0] == "":
+                r3[0] = n
+                compCOMPLETER(7)
+        elif r3[2] == "":
+            r3[2] = n
+            print("strategy1 has worked")
+            c.append(1)
+            compCOMPLETER(9)
 
     strategy1()
 

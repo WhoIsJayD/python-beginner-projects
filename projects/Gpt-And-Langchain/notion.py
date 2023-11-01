@@ -12,7 +12,7 @@ token = os.getenv("NOTION_TOKEN")  # Notion token
 dataset = os.getenv("DATABASE_ID")  # Notion Database
 
 headers = {
-    "Authorization": "Bearer " + token,
+    "Authorization": f"Bearer {token}",
     "Content-Type": "application/json",
     "Notion-Version": "2022-02-22",
 }

@@ -7,8 +7,7 @@ def convertToMilliseconds(time):
     mm = int(mm)
     ms = int(ms)
 
-    milliseconds = hh * 3600000 + mm * 60000 + ms
-    return milliseconds
+    return hh * 3600000 + mm * 60000 + ms
 
 
 def synchronize(time, shift):
@@ -22,23 +21,23 @@ def convertToTime(milliseconds):
     milliseconds = milliseconds % 3600000
     hh = str(hh)
     if len(hh) < 2:
-        hh = "0" + hh
+        hh = f"0{hh}"
 
     mm = milliseconds // 60000
     milliseconds = milliseconds % 60000
     mm = str(mm)
     if len(mm) < 2:
-        mm = "0" + mm
+        mm = f"0{mm}"
 
     ss = milliseconds // 1000
     milliseconds = milliseconds % 1000
     ss = str(ss)
     if len(ss) < 2:
-        ss = "0" + ss
+        ss = f"0{ss}"
 
     milliseconds = str(milliseconds)
     while len(milliseconds) < 3:
-        milliseconds = "0" + milliseconds
+        milliseconds = f"0{milliseconds}"
 
     return f"{hh}:{mm}:{ss},{milliseconds}"
 

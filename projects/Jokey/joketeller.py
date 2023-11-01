@@ -56,7 +56,7 @@ while tellajoke:
                     "French\n pt => Portuguese\n > "
                 )
             )
-            if l_ans in ["en", "cs", "de", "es", "fr", "pt"]:
+            if l_ans in {"en", "cs", "de", "es", "fr", "pt"}:
                 lang = l_ans
                 print("Language " + lang + " set!\n")
 

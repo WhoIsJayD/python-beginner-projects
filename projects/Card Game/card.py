@@ -31,34 +31,22 @@ class Card:
     def __lt__(self, c2):
         if self.value < c2.value:
             return True
-        if self.value == c2.value:
-            if self.suit < c2.suit:
-                return True
-            else:
-                return False
-        return False
+        return self.suit < c2.suit if self.value == c2.value else False
 
     def __gt__(self, c2):
         if self.value > c2.value:
             return True
-        if self.value == c2.value:
-            if self.suit > c2.suit:
-                return True
-            else:
-                return False
-        return False
+        return self.suit > c2.suit if self.value == c2.value else False
 
     def __repr__(self):
-        v = self.values[self.value] + " of " + self.suits[self.suit]
-        return v
+        return f"{self.values[self.value]} of {self.suits[self.suit]}"
 
 
 class Deck:
     def __init__(self):
         self.cards = []
         for i in range(2, 15):
-            for j in range(4):
-                self.cards.append(Card(i, j))
+            self.cards.extend(Card(i, j) for j in range(4))
         shuffle(self.cards)
 
     def rm_card(self):
@@ -76,12 +64,12 @@ class Player:
 
 class Game:
     def __init__(self):
+        pattern = r"\W"
         while True:
-            pattern = r"\W"
             name1 = input("Player 1 name: ")
             name2 = input("Player 2 name: ")
             str = name1 + name2
-            if re.search(pattern, str) == None:
+            if re.search(pattern, str) is None:
                 break
             else:
                 print("Please, don't use special characters")
@@ -120,14 +108,12 @@ class Game:
                 self.display_winner(self.p2.name)
 
         win = self.winner(self.p1, self.p2)
-        print("War is over. {} wins".format(win))
+        print(f"War is over. {win} wins")
 
     def winner(self, p1, p2):
         if p1.wins > p2.wins:
             return p1.name
-        if p1.wins < p2.wins:
-            return p2.name
-        return "It was a tie!"
+        return p2.name if p1.wins < p2.wins else "It was a tie!"
 
 
 game = Game()

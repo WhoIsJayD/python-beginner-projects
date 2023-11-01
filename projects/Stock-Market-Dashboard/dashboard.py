@@ -20,8 +20,7 @@ from ta.momentum import RSIIndicator
 @st.cache
 def load_data(url: str):
     html = pd.read_html(url, header=0)
-    df1 = html[0]
-    return df1
+    return html[0]
 
 
 df = load_data("https://en.wikipedia.org/wiki/List_of_S%26P_500_companies")
@@ -65,10 +64,10 @@ else:
     # Download data
     stock_data = yf.download(option, start=start_date, end=end_date, progress=False)
     ticker_data = yf.Ticker(option)
-    string_logo = "<img src=%s>" % ticker_data.info["logo_url"]
+    string_logo = f'<img src={ticker_data.info["logo_url"]}>'
     st.markdown(string_logo, unsafe_allow_html=True)
     string_name = ticker_data.info["longName"]
-    st.header("**%s**" % string_name)
+    st.header(f"**{string_name}**")
 
     # Bollinger Bands
     indicator_bb = BollingerBands(stock_data["Close"])

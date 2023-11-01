@@ -7,7 +7,7 @@ def formatted_hour(hr):
     elif 23 >= hr >= 12:
         return f"{hr - 12}pm"
     elif hr == 0:
-        return f"12am"
+        return "12am"
     
 def formatted_wind_dir(wd):
     formatted_str = ""
@@ -31,7 +31,7 @@ def formatted_wind_dir(wd):
 
 MONTHS      = [None, 'January', 'February', 'March', 'April', 'May', 'June', 
                     'July', 'August', 'September', 'October', 'November', 'December']
- 
+
 BASE_URL    = "https://api.weatherapi.com/v1/current.json"
 API_KEY     = "" # your API key from weatherapi.com
 CITY        = "Haridwar"
@@ -49,20 +49,20 @@ while True:
             hour = datetime.datetime.now().hour
 
             notification.notify(
-                title   = f"Weather in {CITY} on {date.day} {MONTHS[date.month]}",
-                message = f"{current['condition']['text']} at about {formatted_hour(hour)}\n\
+                title=f"Weather in {CITY} on {date.day} {MONTHS[date.month]}",
+                message=f"{current['condition']['text']} at about {formatted_hour(hour)}\n\
 {current['wind_kph']}kmph winds from the {formatted_wind_dir(current['wind_dir'])}\n\
 Feels like {current['feelslike_c']} °C\nPrecipation: {current['precip_mm']}mm",
-                app_name= "Weather Notifier",
-                app_icon= os.path.dirname(__file__) + r"/weather_logo.ico",
-                timeout= 20
+                app_name="Weather Notifier",
+                app_icon=f"{os.path.dirname(__file__)}/weather_logo.ico",
+                timeout=20,
             )
 
         else:
             notification.notify(
-                title   = "Error encountered",
-                message = f"An error was encountered.\nFailed to fetch weather data.",
-                app_name= "Weather Notifier",
-                app_icon= os.path.dirname(__file__) + r"/weather_logo.ico"
+                title="Error encountered",
+                message=f"An error was encountered.\nFailed to fetch weather data.",
+                app_name="Weather Notifier",
+                app_icon=f"{os.path.dirname(__file__)}/weather_logo.ico",
             )
         init_time = time.time()

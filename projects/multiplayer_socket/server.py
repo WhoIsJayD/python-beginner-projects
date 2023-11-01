@@ -99,7 +99,6 @@ def pre_game1(clientSocket, clientAddress):
             )  # receive chosen word from player
             print("Chosen word=", word)
             game1_chooser(clientAddress, word)  # call subroutine for chooser
-            break
         else:
             attributes[
                 "mes"
@@ -107,7 +106,8 @@ def pre_game1(clientSocket, clientAddress):
             attributes["guesser"] = clientSocket
             attributes["guesser"].send(attributes["mes"].encode())
             game1_guesser(clientAddress)  # call subroutine for guesser
-            break
+
+        break
 
 
 def decision():  # function to calculate score for rock,paper and scissors
@@ -132,14 +132,14 @@ def decision():  # function to calculate score for rock,paper and scissors
             return 1
         else:
             return 2
-    if p1 == 2:
+    elif p1 == 2:
         if p2 == 0:
             return 2
         elif p2 == 5:
             return 1
         else:
             return -1
-    if p1 == 5:
+    elif p1 == 5:
         if p2 == 0:
             return 1
         elif p2 == 2:
@@ -204,14 +204,14 @@ def pre_game2(clientSocket, clientAddress):
                 "Get ready to play Rock, Paper, Scissor\nYou are Player 1".encode()
             )
             game2_1(clientAddress)
-            break
         else:  # next player as player2
             attributes["player2"] = clientSocket
             attributes["player2"].send(
                 "Get ready to play Rock, Paper, Scissor\nYou are Player 2".encode()
             )
             game2_2(clientAddress)
-            break
+
+        break
 
 
 def multi_client(clientSocket, clientAddress):
@@ -233,7 +233,7 @@ while True:
         connectionSocket,
         clientAddress,
     ) = serverSocket.accept()  # welcome socket accepts new client
-    print("Connected to: " + clientAddress[0])
+    print(f"Connected to: {clientAddress[0]}")
     start_new_thread(
         multi_client,
         (

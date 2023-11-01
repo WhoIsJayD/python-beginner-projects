@@ -165,16 +165,14 @@ def main():
 
         elif choice == "3":
             account_number = input("Enter account number: ")
-            account = bank.get_account(account_number)
-            if account:
+            if account := bank.get_account(account_number):
                 print(f"Account Balance: ${account.get_balance()}")
             else:
                 print("Account not found.")
 
         elif choice == "4":
             account_number = input("Enter account number: ")
-            transactions = bank.get_transaction_history(account_number)
-            if transactions:
+            if transactions := bank.get_transaction_history(account_number):
                 print("Transaction History:")
                 for trans_type, amount in transactions:
                     print(f"{trans_type.capitalize()}: ${amount}")

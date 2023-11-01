@@ -8,8 +8,8 @@ fps = cap.get(cv2.CAP_PROP_FPS)
 height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
 width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
 
-print("No. of frames: {}".format(frames))
-print("FPS: {}".format(fps))
+print(f"No. of frames: {frames}")
+print(f"FPS: {fps}")
 
 idx = frames - 1
 

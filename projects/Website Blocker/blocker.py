@@ -30,17 +30,15 @@ while True:
         with open(hosts_path, "r+") as file:
             content = file.read()
             for website in website_list:
-                if website in content:
-                    pass
-                else:
+                if website not in content:
                     # mapping hostnames to your localhost IP address
-                    file.write(redirect + " " + website + "\n")
+                    file.write(f"{redirect} {website}" + "\n")
     else:
         with open(hosts_path, "r+") as file:
             content = file.readlines()
             file.seek(0)
             for line in content:
-                if not any(website in line for website in website_list):
+                if all(website not in line for website in website_list):
                     file.write(line)
 
             # removing hostnmes from host file

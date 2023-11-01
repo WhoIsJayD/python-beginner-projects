@@ -35,25 +35,23 @@ def savedata():
         messagebox.showinfo(
             title="Warning", message="Please fill all the enteries to proceed"
         )
-    else:
-        is_ok = messagebox.askokcancel(
-            title=webinput.get(),
-            message=f"Check all details \n Password : {passinput.get()} \n email : {emailinput.get()} ",
-        )
-        if is_ok:
-            try:
-                with open("data.json", "r") as f:
-                    data = json.load(f)
-                    data[website] = new_data[website]
-                with open("data.json", "w") as f:
-                    json.dump(data, f, indent=4)
-            except:
-                with open("data.json", "w") as f:
-                    json.dump(new_data, f, indent=4)
+    elif is_ok := messagebox.askokcancel(
+        title=webinput.get(),
+        message=f"Check all details \n Password : {passinput.get()} \n email : {emailinput.get()} ",
+    ):
+        try:
+            with open("data.json", "r") as f:
+                data = json.load(f)
+                data[website] = new_data[website]
+            with open("data.json", "w") as f:
+                json.dump(data, f, indent=4)
+        except:
+            with open("data.json", "w") as f:
+                json.dump(new_data, f, indent=4)
 
-            emailinput.delete(0, END)
-            webinput.delete(0, END)
-            passinput.delete(0, END)
+        emailinput.delete(0, END)
+        webinput.delete(0, END)
+        passinput.delete(0, END)
 
 
 # ---------------------------- UI SETUP ------------------------------- #

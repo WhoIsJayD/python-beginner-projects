@@ -193,7 +193,7 @@ def gameloop():
     font1 = pygame.font.Font("freesansbold.ttf", 25)
 
     def show_score(x, y):
-        score = font1.render("SCORE: " + str(score_value), True, (255, 0, 0))
+        score = font1.render(f"SCORE: {score_value}", True, (255, 0, 0))
         screen.blit(score, (x, y))
 
     # highscore part
@@ -201,7 +201,7 @@ def gameloop():
         highscore = f.read()
 
     def show_highscore(x, y):
-        Hiscore_text = font1.render("HISCORE :" + str(highscore), True, (255, 0, 0))
+        Hiscore_text = font1.render(f"HISCORE :{str(highscore)}", True, (255, 0, 0))
         screen.blit(Hiscore_text, (x, y))
         pygame.display.update()
 
@@ -356,10 +356,7 @@ def gameloop():
 
             # checking if distance is smaller than 50 after then collision will occur
 
-            if distance < 50:
-                return True
-            else:
-                return False
+            return distance < 50
 
         # getting distance between our main car and car2
         def iscollision(car2X, car2Y, maincarX, maincarY):
@@ -368,10 +365,7 @@ def gameloop():
             )
 
             # checking if distance is smaller than 50 after then collision will occur
-            if distance < 50:
-                return True
-            else:
-                return False
+            return distance < 50
 
         # getting distance between our main car and car3
         def iscollision(car3X, car3Y, maincarX, maincarY):
@@ -380,10 +374,7 @@ def gameloop():
             )
 
             # checking if distance is smaller then 50 after then collision will occur
-            if distance < 50:
-                return True
-            else:
-                return False
+            return distance < 50
 
         ##### giving collision a variable #####
 

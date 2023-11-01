@@ -15,9 +15,6 @@ ws["C1"].value = "Ratings"
 
 def link(url, pages):
     for i in range(1, pages + 1):
-        title = []
-        author = []
-        rating = []
         try:
             response = requests.get(f"{url}?page={i}")
         except:
@@ -28,17 +25,11 @@ def link(url, pages):
         data = bs(html, "html.parser")
 
         titles = data.find_all("span", itemprop="name", role="heading")
-        for j in titles:
-            title.append(j.string)
-
+        title = [j.string for j in titles]
         authors = data.find_all("a", class_="authorName")
-        for j in authors:
-            author.append(j.string)
-
+        author = [j.string for j in authors]
         ratings = data.find_all("span", class_="minirating")
-        for j in ratings:
-            rating.append(j.get_text().replace(" ", "")[0:4])
-
+        rating = [j.get_text().replace(" ", "")[:4] for j in ratings]
         for j in range(len(title)):
             try:
                 rating_float = float(rating[j].strip())

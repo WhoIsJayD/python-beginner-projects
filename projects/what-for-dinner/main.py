@@ -29,7 +29,6 @@ def main():
         "strYoutube"
     ]  # Extract the YouTube video link for the meal (if available).
 
-    # TODO: Define color codes for printing colored output.
     class bcolors:
         HEADER = "\033[95m"
         OKBLUE = "\033[94m"
@@ -42,13 +41,13 @@ def main():
         UNDERLINE = "\033[4m"
 
     # Print the information about the meal in a stylized format.
-    print(f"-------------------------------------------------------------")
+    print("-------------------------------------------------------------")
     print(f"Let's have a {bcolors.BOLD}{menu_name}{bcolors.ENDC} for dinner!")
     print(f"This menu is {menu_country} and it is {menu_category}!")
     print(
         f"You can follow this link: {bcolors.OKBLUE}{menu_video}{bcolors.ENDC} or the instructions to cook it:\n{menu_instruction}"
     )
-    print(f"-------------------------------------------------------------")
+    print("-------------------------------------------------------------")
 
 
 if __name__ == "__main__":

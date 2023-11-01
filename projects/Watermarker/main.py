@@ -29,7 +29,7 @@ for filename in glob.glob("images/*.jpeg"):  # assuming gif
     if not os.path.exists("output"):
         os.makedirs("output")
 
-    copied_image.save("output/" + os.path.basename("mord" + filename))
+    copied_image.save(f'output/{os.path.basename(f"mord{filename}")}')
     # this save the image in the output folder
     # copied_image.show()
     # pasted the crop image onto the base image

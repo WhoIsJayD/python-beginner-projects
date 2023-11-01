@@ -24,29 +24,25 @@ class WeatherForecast:
         if response.status_code == 200:
             data = response.json()
             hourly_forecast = data["data"]
-            weather_details = []
-
-            for forecast in hourly_forecast:
-                weather_details.append(
-                    {
-                        "city_name": data["city_name"],
-                        "country_code": data["country_code"],
-                        "date": forecast["datetime"],
-                        "temperature": forecast["temp"],
-                        "min_temp": forecast["min_temp"],
-                        "max_temp": forecast["max_temp"],
-                        "weather_description": forecast["weather"]["description"],
-                        "wind_speed": forecast["wind_spd"],
-                        "wind_direction": forecast["wind_cdir_full"],
-                        "cloud_coverage": forecast["clouds"],
-                        "visibility": forecast["vis"],
-                        "uv_index": forecast["uv"],
-                        "dew_point": forecast["dewpt"],
-                    }
-                )
-
-            df = pd.DataFrame(weather_details)
-            return df
+            weather_details = [
+                {
+                    "city_name": data["city_name"],
+                    "country_code": data["country_code"],
+                    "date": forecast["datetime"],
+                    "temperature": forecast["temp"],
+                    "min_temp": forecast["min_temp"],
+                    "max_temp": forecast["max_temp"],
+                    "weather_description": forecast["weather"]["description"],
+                    "wind_speed": forecast["wind_spd"],
+                    "wind_direction": forecast["wind_cdir_full"],
+                    "cloud_coverage": forecast["clouds"],
+                    "visibility": forecast["vis"],
+                    "uv_index": forecast["uv"],
+                    "dew_point": forecast["dewpt"],
+                }
+                for forecast in hourly_forecast
+            ]
+            return pd.DataFrame(weather_details)
         else:
             print("Error:", response.status_code)
             return None

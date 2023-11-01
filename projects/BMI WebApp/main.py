@@ -3,7 +3,7 @@ from pywebio.output import *
 
 
 class calculation:
-    def BMIcalculator(Height, Mass):
+    def BMIcalculator(self, Mass):
         for t1, t2 in [
             (16, "severely underweight"),
             (18.5, "underweight"),

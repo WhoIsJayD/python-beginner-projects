@@ -23,7 +23,7 @@ def speak(audio):
 
 def wishMe():
     # Function to greet the user based on the time of day
-    hour = int(datetime.datetime.now().hour)
+    hour = datetime.datetime.now().hour
     if 0 <= hour < 12:
         speak("Good Morning!")
     elif 12 <= hour < 18:
@@ -68,7 +68,7 @@ if __name__ == "__main__":
     while True:
         query = takeCommand().lower()
         # Exits the interpreter if you just say quit or exit
-        if query == "quit" or query == "exit":
+        if query in ["quit", "exit"]:
             break
         # Logic for executing tasks based on user's query
         if "wikipedia" in query:

@@ -79,8 +79,8 @@ def get_aqi():
         aqi_label.config(text=f"AQI: {aqi}")
     else:
         aqi_label.config(text="Error: Unable to fetch AQI data")
-        city_label.config(text=f"City: -")
-        state_label.config(text=f"State: -")
+        city_label.config(text="City: -")
+        state_label.config(text="State: -")
 
 
 get_aqi_button.config(command=get_aqi)

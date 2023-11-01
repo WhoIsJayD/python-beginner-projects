@@ -111,13 +111,11 @@ while True:
         player_a_score += 1
         pen.clear()
         pen.write(
-            "Player A: {}                    Player B: {} ".format(
-                player_a_score, player_b_score
-            ),
+            f"Player A: {player_a_score}                    Player B: {player_b_score} ",
             align="center",
             font=("Arial", 24, "normal"),
         )
-        # os.system("afplay wallhit.wav&")
+            # os.system("afplay wallhit.wav&")
 
     if ball.xcor() < -390:
         ball.goto(0, 0)
@@ -125,13 +123,11 @@ while True:
         player_b_score += 1
         pen.clear()
         pen.write(
-            "Player A: {}                    Player B: {} ".format(
-                player_a_score, player_b_score
-            ),
+            f"Player A: {player_a_score}                    Player B: {player_b_score} ",
             align="center",
             font=("Arial", 24, "normal"),
         )
-        # os.system("afplay wallhit.wav&")
+            # os.system("afplay wallhit.wav&")
 
     # Handling collisions with paddles
     if (

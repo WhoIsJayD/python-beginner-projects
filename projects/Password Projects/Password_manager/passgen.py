@@ -63,14 +63,9 @@ number_of_letter = random.randint(4, 6)
 number_of_numbers = random.randint(4, 6)
 number_of_symblos = random.randint(4, 6)
 
-passlist = []
-for i in range(number_of_letter):
-    passlist.append(random.choice(letters))
-for i in range(number_of_numbers):
-    passlist.append(random.choice(numbers))
-for i in range(number_of_symblos):
-    passlist.append(random.choice(symbols))
-
+passlist = [random.choice(letters) for _ in range(number_of_letter)]
+passlist.extend(random.choice(numbers) for _ in range(number_of_numbers))
+passlist.extend(random.choice(symbols) for _ in range(number_of_symblos))
 password = ""
 random.shuffle(passlist)
 

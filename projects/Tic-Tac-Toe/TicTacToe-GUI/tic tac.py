@@ -62,10 +62,9 @@ def firstFontDisplayer():
 
 
 def cursorChecker(a, b):
-    if (a[0] > b[0] and a[0] < b[0] + b[2]) and (a[1] > b[1] and a[1] < b[1] + b[3]):
-        return True
-    else:
-        return False
+    return (a[0] > b[0] and a[0] < b[0] + b[2]) and (
+        a[1] > b[1] and a[1] < b[1] + b[3]
+    )
 
 
 def secondFontDisplayer():
@@ -151,23 +150,23 @@ def player(a):
         pygame.display.update()
         time.sleep(2)
         return firstinitialiser()
-    if a == 1 and a not in r:
+    if a == 1:
         r1[0] = m
-    elif a == 2 and a not in r:
+    elif a == 2:
         r1[1] = m
-    elif a == 3 and a not in r:
+    elif a == 3:
         r1[2] = m
-    elif a == 4 and a not in r:
+    elif a == 4:
         r2[0] = m
-    elif a == 5 and a not in r:
+    elif a == 5:
         r2[1] = m
-    elif a == 6 and a not in r:
+    elif a == 6:
         r2[2] = m
-    elif a == 7 and a not in r:
+    elif a == 7:
         r3[0] = m
-    elif a == 8 and a not in r:
+    elif a == 8:
         r3[1] = m
-    elif a == 9 and a not in r:
+    elif a == 9:
         r3[2] = m
     r.append(a)
     print(" | ".join(r1))

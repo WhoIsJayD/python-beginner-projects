@@ -133,7 +133,7 @@ print(len(sorted_similar_movies))
 
 
 i = 0
-print("Top 5 similar movies to " + movie_user_likes + " are:\n")
+print(f"Top 5 similar movies to {movie_user_likes}" + " are:\n")
 for element in sorted_similar_movies:
     print(get_title_from_index(element[0]))
     i = i + 1

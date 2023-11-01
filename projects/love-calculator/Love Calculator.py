@@ -1,13 +1,8 @@
 name1 = input("Please type Name 1.\n")
 name2 = input("Please type Name 2.\n")
 
-total_vowel1 = 0
-for i in ["a", "e", "i", "o", "u"]:
-    total_vowel1 += name1.count(i)
-total_vowel2 = 0
-for i in ["a", "e", "i", "o", "u"]:
-    total_vowel2 += name2.count(i)
-
+total_vowel1 = sum(name1.count(i) for i in ["a", "e", "i", "o", "u"])
+total_vowel2 = sum(name2.count(i) for i in ["a", "e", "i", "o", "u"])
 love = 0
 if total_vowel1 == total_vowel2:
     import random
@@ -45,9 +40,7 @@ if len(name1) == len(name2):
 import random
 
 love += random.randint(10, 50)
-if love > 100:
-    love = 100
-
+love = min(love, 100)
 print("Calculating...")
 import time
 import random

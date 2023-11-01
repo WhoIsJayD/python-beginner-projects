@@ -26,9 +26,7 @@ def main():
 
 
 def getPasswordLength():
-    # Set the password length with constraints for the password length
-    password_length = int(input("\nEnter the length of password: "))
-    return password_length
+    return int(input("\nEnter the length of password: "))
 
 
 def getCharacters():
@@ -38,14 +36,11 @@ def getCharacters():
     num = string.digits
     symbols = string.punctuation
 
-    all_characters = lower + upper + num + symbols
-    return all_characters
+    return lower + upper + num + symbols
 
 
 def generatePassword(all_characters, password_length):
-    # generate a password string
-    password = "".join(random.sample(all_characters, password_length))
-    return password
+    return "".join(random.sample(all_characters, password_length))
 
 
 main()

@@ -602,8 +602,7 @@ def change_theme():
     text_editor.config(background=bg_color, fg=fg_color)
 
 
-count = 0
-for i in color_dict:
+for count, i in enumerate(color_dict):
     color_theme.add_radiobutton(
         label=i,
         image=color_icons[count],
@@ -611,8 +610,6 @@ for i in color_dict:
         variable=theme_choice,
         command=change_theme,
     )
-    count += 1
-
 # ----------------------------------->>> End main menu functionality  <<< -------------------------------------------#
 main_application.config(menu=main_menu)
 

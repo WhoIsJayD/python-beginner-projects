@@ -234,8 +234,8 @@ def generate_similar_playlist(spotifyObject, playlist_url):
     song_ids = []
     total_songs = []
 
-    for z in range(len(song_names)):
-        item = song_names[z]
+    for song_name in song_names:
+        item = song_name
         result = spotifyObject.search(q=item, type="track")
         song_id = result["tracks"]["items"][0]["id"]
 

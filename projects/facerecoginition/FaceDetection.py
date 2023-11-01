@@ -50,7 +50,7 @@ while True:
         result = model.predict(face)
         if result[1] < 500:
             confidence = int(100 * (1 - (result[1]) / 300))
-            display_string = str(confidence) + "% confidence"
+            display_string = f"{confidence}% confidence"
         cv2.putText(
             img,
             display_string,
@@ -64,20 +64,16 @@ while True:
             cv2.putText(
                 img, "Unlocked", (250, 450), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0)
             )
-            cv2.imshow("Face Cropper", img)
         else:
             cv2.putText(
                 img, "locked", (250, 450), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 0, 255)
             )
-            cv2.imshow("Face Cropper", img)
-
+        cv2.imshow("Face Cropper", img)
     except:
         cv2.putText(
             img, "No Face", (250, 450), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 0, 255)
         )
         cv2.imshow("Face Cropper", img)
-        pass
-
     if cv2.waitKey(1) == 13:
         break
 

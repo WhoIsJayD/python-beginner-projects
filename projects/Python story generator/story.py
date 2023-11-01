@@ -9,13 +9,6 @@ from ttkthemes import ThemedStyle
 
 # Function to generate a random story
 def generate_story():
-    when = [
-        "A few years ago",
-        "Yesterday",
-        "Last night",
-        "A long time ago",
-        "On 20th Jan",
-    ]
     who = ["a rabbit", "an elephant", "a mouse", "a turtle", "a cat"]
     name = ["Ali", "Miriam", "Daniel", "Hoouk", "Starwalker"]
     residence = ["Barcelona", "India", "Germany", "Venice", "England"]
@@ -31,25 +24,15 @@ def generate_story():
     story = []
     total_words = 0
 
+    when = [
+        "A few years ago",
+        "Yesterday",
+        "Last night",
+        "A long time ago",
+        "On 20th Jan",
+    ]
     while total_words < 100:
-        sentence = (
-            random.choice(when)
-            + ", "
-            + random.choice(who)
-            + " named "
-            + random.choice(name)
-            + ", who lived in "
-            + random.choice(residence)
-            + ", decided to go to the "
-            + random.choice(went)
-            + ". "
-            + random.choice(name)
-            + " "
-            + random.choice(happened)
-            + " while at the "
-            + random.choice(went)
-            + "."
-        )
+        sentence = f"{random.choice(when)}, {random.choice(who)} named {random.choice(name)}, who lived in {random.choice(residence)}, decided to go to the {random.choice(went)}. {random.choice(name)} {random.choice(happened)} while at the {random.choice(went)}."
 
         story.append(sentence)
         total_words += len(sentence.split())

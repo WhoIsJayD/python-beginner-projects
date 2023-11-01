@@ -44,7 +44,7 @@ class SkyCast:
             return
 
         st.markdown(
-            f"<h2 style='text-align: center;'>Today's Weather</h2>",
+            "<h2 style='text-align: center;'>Today's Weather</h2>",
             unsafe_allow_html=True,
         )
 
@@ -102,7 +102,7 @@ class SkyCast:
             # If the submit button is not clicked, do not proceed further
             return
         st.markdown(
-            f"<h2 style='text-align: center;'>Forecast Weather</h2>",
+            "<h2 style='text-align: center;'>Forecast Weather</h2>",
             unsafe_allow_html=True,
         )
 
@@ -193,11 +193,9 @@ class SkyCast:
         try:
             response = requests.get(self.base_url, params=params)
             if response.status_code == 200:
-                data = response.json()
-                return data
-            else:
-                st.write(f"Error: {response.status_code} - {response.text}")
-                return None
+                return response.json()
+            st.write(f"Error: {response.status_code} - {response.text}")
+            return None
         except requests.exceptions.RequestException as e:
             st.write(f"Error: {e}")
             return None

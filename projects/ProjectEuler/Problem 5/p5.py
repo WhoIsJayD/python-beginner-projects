@@ -1,8 +1,5 @@
 def is_divisible_to(number, x):
-    for i in reversed(list(range(1, x + 1))):
-        if number % i != 0:
-            return False
-    return True
+    return all(number % i == 0 for i in reversed(list(range(1, x + 1))))
 
 
 def divisible_to(x):

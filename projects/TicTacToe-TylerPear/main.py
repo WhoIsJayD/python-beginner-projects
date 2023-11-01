@@ -42,7 +42,7 @@ def collect_input(player):
         valid = True
         return move
     else:
-        while valid == False:
+        while not valid:
             move = input("Type a valid move:")
             if move in ["TL", "TM", "TR", "ML", "MM", "MR", "BL", "BM", "BR"]:
                 valid = True
@@ -98,10 +98,7 @@ def change_board(move, board, player):
 
 
 def change_player(i):
-    if i % 2 == 0:
-        return "O"
-    else:
-        return "X"
+    return "O" if i % 2 == 0 else "X"
 
 
 def check_for_win(board, player):
@@ -155,15 +152,12 @@ def player_won(board):
     xwon = check_for_win(board, "X")
     owon = check_for_win(board, "O")
 
-    if xwon or owon:
-        return True
-    else:
-        return False
+    return bool(xwon or owon)
 
 
 if __name__ == "__main__":
     catsgame = False
-    while player_won(board) == False and catsgame == False:
+    while player_won(board) == False and not catsgame:
         i += 1
         if i == 10:
             print("Cat's Game!")
@@ -173,7 +167,7 @@ if __name__ == "__main__":
             board = change_board(collect_input(player), board, player)
             print_board()
 
-    if catsgame == False:
+    if not catsgame:
         if player == "X":
             print("Congrats! X Wins!")
         elif player == "O":

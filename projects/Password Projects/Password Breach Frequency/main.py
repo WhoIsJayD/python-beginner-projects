@@ -10,7 +10,7 @@ m.update(password.encode())
 hash_val = m.hexdigest()
 
 # Connect to the HIBP API
-url = "https://api.pwnedpasswords.com/range/" + hash_val[0:5]
+url = f"https://api.pwnedpasswords.com/range/{hash_val[:5]}"
 r = requests.get(url)
 
 # Split the string into a list, with each element of the list representing a single line
@@ -20,10 +20,10 @@ output = {}
 # Convert each line in the list into a dictionary, with the hash as the key and the frequency as the value
 for line in list:
     suffix, count = line.split(":")
-    output[hash_val[0:5] + suffix.lower()] = int(count)
+    output[hash_val[:5] + suffix.lower()] = int(count)
 
 # If the hash value of the entered password is a key in the dictionary, print its frequency
-if hash_val in output.keys():
+if hash_val in output:
     print(
         "Your password hash has appeared",
         "{:,}".format(output[hash_val]),

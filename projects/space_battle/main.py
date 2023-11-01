@@ -56,7 +56,7 @@ def play():
     impact = False
 
     def show_score(x, y):
-        count1 = font.render(("score:" + str(count)), True, (220, 34, 120))
+        count1 = font.render(f"score:{count}", True, (220, 34, 120))
         screen.blit(count1, (x, y))
 
     def game_over(x, y):

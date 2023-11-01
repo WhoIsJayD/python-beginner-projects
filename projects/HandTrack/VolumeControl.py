@@ -75,7 +75,7 @@ while True:
     cv2.rectangle(image, (50, int(volBar)), (85, 400), (0, 255, 0), cv2.FILLED)
     cv2.putText(
         image,
-        str(int(volP)) + "%",
+        f"{int(volP)}%",
         (50, 450),
         cv2.FONT_HERSHEY_COMPLEX,
         1,
@@ -88,7 +88,7 @@ while True:
     pTime = cTime
     cv2.putText(
         image,
-        "fps: " + str(int(fps)),
+        f"fps: {int(fps)}",
         (500, 400),
         cv2.FONT_HERSHEY_COMPLEX,
         1,

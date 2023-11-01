@@ -66,24 +66,19 @@ else:
 # Mask bin/dec
 mask_bin = int(ip_prefix) * "1" + (32 - int(ip_prefix)) * "0"
 
-mask_bin_list = []
-for i in range(0, len(mask_bin), 8):
-    mask_bin_list.append(mask_bin[i : i + 8])
-
-
-mask_dec_list = [int(("0b" + i), 2) for i in mask_bin_list]
+mask_bin_list = [mask_bin[i : i + 8] for i in range(0, len(mask_bin), 8)]
+mask_dec_list = [int(f"0b{i}", 2) for i in mask_bin_list]
 
 
 # IP Addr bin
 def ip_in_bin(octet):
-    m = str(bin(octet))
-    m1 = [i for i in m]
+    m = bin(octet)
+    m1 = list(m)
     m1 = m1[2::]
     if len(m1) != 8:
-        for i in range(0, 8 - len(m1)):
+        for _ in range(0, 8 - len(m1)):
             m1.insert(0, "0")
-    m2 = ["".join(m1)]
-    return m2
+    return ["".join(m1)]
 
 
 bin_ip_list = []  # IP Addr bin----------------
@@ -92,14 +87,10 @@ for i in range(len(ip_list_octet)):
     bin_ip_list[i] = bin_ip_list[i][0]
 
 
-# Subnet add dec
-subnet_decimal_list = []
-for i in range(4):
-    subnet_decimal_list.append(
-        int(("0b" + mask_bin_list[i]), 2) & int(("0b" + bin_ip_list[i]), 2)
-    )
-
-
+subnet_decimal_list = [
+    int(("0b" + mask_bin_list[i]), 2) & int(("0b" + bin_ip_list[i]), 2)
+    for i in range(4)
+]
 # Subnet add bin
 subnet_bin_list = []
 for i in range(len(ip_list_octet)):
@@ -180,20 +171,20 @@ available_number = 2**available_number_prom
 
 # Output---------------------------------------------------------
 # -------------------------------------------------------------
-print("IP address: {}/{}".format(ip_addr, ip_prefix))
-print("Class of IP address: {}".format(class_of_ip))
-print("Address category: {}".format(type_of_ip))
-print("Host address (decimal): {}".format(ip_list_octet))
-print("Mask (decimal): {}".format(mask_dec_list))
-print("Network address (decimal): {}".format(subnet_decimal_list))
-print("Broadcast address (decimal): {}".format(broadcast_dec))
-print("First available host (decimal): {}".format(first_av_host))
-print("Last available host (decimal): {}".format(last_av_host))
+print(f"IP address: {ip_addr}/{ip_prefix}")
+print(f"Class of IP address: {class_of_ip}")
+print(f"Address category: {type_of_ip}")
+print(f"Host address (decimal): {ip_list_octet}")
+print(f"Mask (decimal): {mask_dec_list}")
+print(f"Network address (decimal): {subnet_decimal_list}")
+print(f"Broadcast address (decimal): {broadcast_dec}")
+print(f"First available host (decimal): {first_av_host}")
+print(f"Last available host (decimal): {last_av_host}")
 
-print("Host address(binary): {}".format(bin_ip_list))
-print("Mask(binary): {}".format(mask_bin_list))
-print("Network address(binary): {}".format(subnet_bin_list))
-print("Broadcast address(binary): {}".format(broadcast_bin))
+print(f"Host address(binary): {bin_ip_list}")
+print(f"Mask(binary): {mask_bin_list}")
+print(f"Network address(binary): {subnet_bin_list}")
+print(f"Broadcast address(binary): {broadcast_bin}")
 print("First available host (binary): {}".format(first_bin_list))
 print("Last available host (binary): {}".format(last_bin_list))
 print("Total Number of Hosts: {}".format(available_number))

@@ -18,8 +18,7 @@ class Player(Block):
         self.x = x_pos
 
     def screen_constrain(self):
-        if self.rect.top <= 0:
-            self.rect.top = 0
+        self.rect.top = max(self.rect.top, 0)
         if self.rect.bottom >= HEIGHT:
             self.rect.bottom = HEIGHT
 
@@ -35,24 +34,22 @@ class Opponent(Block):
         self.x = x_pos
 
     def update(self, ball_group):
-        if game_state.state == "hard_game" or game_state.state == "med_game":
+        if game_state.state in ["hard_game", "med_game"]:
             if self.rect.center[1] < ball_group.sprite.rect.y:
                 self.rect.y += self.speed
             if self.rect.center[1] > ball_group.sprite.rect.y:
                 self.rect.y -= self.speed
-            self.constrain()
         else:
             if self.rect.top < ball_group.sprite.rect.y:
                 self.rect.y += self.speed
             if self.rect.bottom > ball_group.sprite.rect.y:
                 self.rect.y -= self.speed
-            self.constrain()
+
+        self.constrain()
 
     def constrain(self):
-        if self.rect.top <= 0:
-            self.rect.top = 0
-        if self.rect.bottom > HEIGHT:
-            self.rect.bottom = HEIGHT
+        self.rect.top = max(self.rect.top, 0)
+        self.rect.bottom = min(self.rect.bottom, HEIGHT)
 
 
 class Ball(Block):

@@ -36,39 +36,28 @@ def rules_ip():
 
     mask_bin = int(prefix) * "1" + (32 - int(prefix)) * "0"
 
-    mask_bin_list = []
-    for i in range(0, len(mask_bin), 8):
-        mask_bin_list.append(mask_bin[i : i + 8])
-
-    # mask_dec_list = [int(('0b' + i), 2) for i in mask_bin_list]
-
-    return mask_bin_list
+    return [mask_bin[i : i + 8] for i in range(0, len(mask_bin), 8)]
 
 
 ip_by_octat = rules_ip()
 
-table_of_prefix_value = {}
-for i in range(0, 32):
-    table_of_prefix_value.update({str(32 - i): 2**i})
-
-
+table_of_prefix_value = {str(32 - i): 2**i for i in range(0, 32)}
 # Prefix we will use
-for i in table_of_prefix_value.keys():
-    if int(int(table_of_prefix_value[i])) >= max_value_dev:
+for i, value in table_of_prefix_value.items():
+    if int(value) >= max_value_dev:
         prefix_need = [i, int(table_of_prefix_value[i])]
         break
 
 
 # Network address in bin
 def ip_in_bin(octet):
-    m = str(bin(octet))
-    m1 = [i for i in m]
+    m = bin(octet)
+    m1 = list(m)
     m1 = m1[2::]
     if len(m1) != 8:
-        for i in range(0, 8 - len(m1)):
+        for _ in range(0, 8 - len(m1)):
             m1.insert(0, "0")
-    m2 = ["".join(m1)]
-    return m2
+    return ["".join(m1)]
 
 
 ip_list_octet = network_addr.split(".")
@@ -159,36 +148,31 @@ print(
 
 for i in range(num_of_sub):
     print(
-        str(i + 1)
-        + "\t"
-        + 10 * " "
-        + str(max_value_dev)
-        + "\t"
-        + 10 * " "
-        + "{}.{}.{}.{}".format(
-            ip_list_sub[i][0][0],
-            ip_list_sub[i][0][1],
-            ip_list_sub[i][0][2],
-            ip_list_sub[i][0][3],
-        )
-        + "\t"
-        + 7 * " "
-        + "{}.{}.{}.{}".format(
-            ip_list_sub[i][1][0],
-            ip_list_sub[i][1][1],
-            ip_list_sub[i][1][2],
-            ip_list_sub[i][1][3],
-        )
-        + "\t"
-        + 7 * " "
-        + "{}.{}.{}.{} - {}.{}.{}.{}".format(
-            ip_list_sub[i][0][0],
-            ip_list_sub[i][0][1],
-            ip_list_sub[i][0][2],
-            ip_list_sub[i][0][3] + 1,
-            ip_list_sub[i][1][0],
-            ip_list_sub[i][1][1],
-            ip_list_sub[i][1][2],
-            ip_list_sub[i][1][3] - 1,
+        (
+            (
+                (
+                    (
+                        (
+                            (
+                                (
+                                    str(i + 1)
+                                    + "\t"
+                                    + 10 * " "
+                                    + str(max_value_dev)
+                                    + "\t"
+                                    + 10 * " "
+                                    + f"{ip_list_sub[i][0][0]}.{ip_list_sub[i][0][1]}.{ip_list_sub[i][0][2]}.{ip_list_sub[i][0][3]}"
+                                )
+                                + "\t"
+                            )
+                            + 7 * " "
+                        )
+                        + f"{ip_list_sub[i][1][0]}.{ip_list_sub[i][1][1]}.{ip_list_sub[i][1][2]}.{ip_list_sub[i][1][3]}"
+                    )
+                    + "\t"
+                )
+                + 7 * " "
+            )
+            + f"{ip_list_sub[i][0][0]}.{ip_list_sub[i][0][1]}.{ip_list_sub[i][0][2]}.{ip_list_sub[i][0][3] + 1} - {ip_list_sub[i][1][0]}.{ip_list_sub[i][1][1]}.{ip_list_sub[i][1][2]}.{ip_list_sub[i][1][3] - 1}"
         )
     )

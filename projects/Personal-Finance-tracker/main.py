@@ -14,8 +14,7 @@ class FinanceManager:
         self.expenses.append(expense)
 
     def calculate_total_expenses(self):
-        total_expenses = sum(expense.amount for expense in self.expenses)
-        return total_expenses
+        return sum(expense.amount for expense in self.expenses)
 
     def list_expenses(self):
         for expense in self.expenses:

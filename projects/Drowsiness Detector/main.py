@@ -31,11 +31,7 @@ def eye_aspect_ratio(eye):
     # find the Euclidean distance between the horizontal eye landmark
     C = dist.euclidean(eye[0], eye[3])
 
-    # compute the eye aspect ratio
-    ear = (A + B) / (2.0 * C)
-
-    # return the eye aspect ratio
-    return ear
+    return (A + B) / (2.0 * C)
 
 
 # parse our command line arguments

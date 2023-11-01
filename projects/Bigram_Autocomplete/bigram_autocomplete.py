@@ -23,9 +23,8 @@ training_corpus = input("""Insert the training corpus here (can be multiline)"""
 def text_clean_and_tokenize(training_corpus):
     text = training_corpus.lower().split("\n")
     text = [re.sub("[^a-zA-Z0-9 -]", "", i) for i in text]
-    text = ["<s> " + i + " </s>" for i in text]
-    tokenized_text = " ".join(text).split()
-    return tokenized_text
+    text = [f"<s> {i} </s>" for i in text]
+    return " ".join(text).split()
 
 
 # This function just calculates the frequencies of various ...
@@ -58,9 +57,7 @@ def autocomplete(starting_word, training_corpus):
 if __name__ == "__main__":
     word = [input("insert a word: ")]
 
-    for i in range(6):
-        word.append(autocomplete(word[i], training_corpus))
-
+    word.extend(autocomplete(word[i], training_corpus) for i in range(6))
     print(" ".join(word))
 
 

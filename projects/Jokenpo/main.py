@@ -15,7 +15,7 @@ def jogar():
         partida = Partida(jogador1, jogador2)
         partida.jogar()
     except Exception as e:
-        print("Erro: " + str(e))
+        print(f"Erro: {str(e)}")
 
 
 def simularJogo():
@@ -32,7 +32,7 @@ def simularJogo():
         partida = Partida(jogador1, jogador2)
         partida.simular()
     except Exception as e:
-        print("Erro: " + str(e))
+        print(f"Erro: {str(e)}")
 
 
 print("Escolha um opção:\n" "1 - Jogar\n" "2 - Simular um jogo\n" "0 - Sair\n")

@@ -11,7 +11,7 @@ midSem = int(
 )
 Credits = 0
 totalCredits = 0
-for i in range(n):
+for _ in range(n):
     course_name = input("Enter Course Name: ")
     course_Credits = int(input(f"Enter Total Credits Of {course_name}: "))
     if midSem == 0:

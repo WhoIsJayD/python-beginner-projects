@@ -52,9 +52,9 @@ class Menu:
 
     def controls(self, event: pygame.event):
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_w or event.key == pygame.K_UP:
+            if event.key in [pygame.K_w, pygame.K_UP]:
                 self.select(1)
-            if event.key == pygame.K_s or event.key == pygame.K_DOWN:
+            if event.key in [pygame.K_s, pygame.K_DOWN]:
                 self.select(2)
 
     def select(self, code: int):
@@ -67,8 +67,7 @@ class Menu:
                 self.selected -= 1
                 self.text_list[self.selected + 1].selected = False
 
-        # Go up the list
-        if code == 2:
+        elif code == 2:
             if self.selected == 2:
                 self.selected = 1
                 self.text_list[2].selected = False
@@ -123,12 +122,12 @@ class GameOver:
         self.selected = 0
 
     def text(self, code: int):
-        options = ["Yes", "No"]
         if code == 1:
             return Text("Game Over", 90).display()
         if code == 2:
             return Text("Play Again?", 30).display()
         if code == 3:
+            options = ["Yes", "No"]
             self.text_list = [Text(text, 25) for text in options]
             self.text_list[0].selected = True
 
@@ -159,9 +158,9 @@ class GameOver:
 
     def controls(self, event: pygame.event):
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
+            if event.key in [pygame.K_d, pygame.K_RIGHT]:
                 self.select(1)
-            if event.key == pygame.K_a or event.key == pygame.K_LEFT:
+            if event.key in [pygame.K_a, pygame.K_LEFT]:
                 self.select(2)
 
     def select(self, code: int):
@@ -173,7 +172,7 @@ class GameOver:
                 self.selected += 1
                 self.text_list[self.selected - 1].selected = False
 
-        if code == 2:
+        elif code == 2:
             if self.selected == 0:
                 self.selected = 1
                 self.text_list[0].selected = False
@@ -352,7 +351,7 @@ class Objects:
             self.enemy_count += 1
 
     def place_enemies(self):
-        for i in range(self.enemy_count):
+        for _ in range(self.enemy_count):
             # Place the enemies within the limit
             if len(self.enemies_list) < self.enemy_count:
                 self.enemies_list.append(Enemies())
@@ -448,10 +447,7 @@ class Objects:
             self.reset_enemies(enemy, True)
 
     def player_hit(self, collision: pygame.Rect):
-        # Checks if the player has been hit or not
-        hit = collision.colliderect(self.collision_box())
-        # Ends the game
-        if hit:
+        if hit := collision.colliderect(self.collision_box()):
             GameOver().execute()
 
 

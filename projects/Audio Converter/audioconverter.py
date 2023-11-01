@@ -16,7 +16,7 @@ fileext = filename.split(".")[-1]
 print(f"Converting from {fileext} to {frm}")
 
 # only run if converting to a different format
-if not (filename.endswith(str("." + frm))):
+if not filename.endswith(str(f".{frm}")):
     track = AudioSegment.from_file(filename, fileext)
     newname = filebase.replace(fileext, frm)
 

@@ -52,31 +52,17 @@ def cosineSimilarity():
         databaseTF = []
 
         for word in universalSetOfUniqueWords:
-            queryTfCounter = 0
-            databaseTfCounter = 0
-
-            for word2 in queryWordList:
-                if word == word2:
-                    queryTfCounter += 1
+            queryTfCounter = sum(1 for word2 in queryWordList if word == word2)
             queryTF.append(queryTfCounter)
 
-            for word2 in databaseWordList:
-                if word == word2:
-                    databaseTfCounter += 1
+            databaseTfCounter = sum(1 for word2 in databaseWordList if word == word2)
             databaseTF.append(databaseTfCounter)
 
-        dotProduct = 0
-        for i in range(len(queryTF)):
-            dotProduct += queryTF[i] * databaseTF[i]
-
-        queryVectorMagnitude = 0
-        for i in range(len(queryTF)):
-            queryVectorMagnitude += queryTF[i] ** 2
+        dotProduct = sum(queryTF[i] * databaseTF[i] for i in range(len(queryTF)))
+        queryVectorMagnitude = sum(item**2 for item in queryTF)
         queryVectorMagnitude = math.sqrt(queryVectorMagnitude)
 
-        databaseVectorMagnitude = 0
-        for i in range(len(databaseTF)):
-            databaseVectorMagnitude += databaseTF[i] ** 2
+        databaseVectorMagnitude = sum(item_**2 for item_ in databaseTF)
         databaseVectorMagnitude = math.sqrt(databaseVectorMagnitude)
 
         matchPercentage = (float)(

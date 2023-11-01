@@ -12,34 +12,33 @@ def new_game():
 
     if answer not in ["yes", "y", "no", "n"]:
         new_game()
-    else:
-        if answer == "yes" or answer == "y":
-            while True:
-                try:
-                    os.system("cls" if os.name == "nt" else "clear")
-                    size = int(
-                        input(
-                            "Enter a number between 5 and 15.\n\nThis will determine how big the playing board is and how many turns you have to find the Battleship. (5 rows, 5 columns, 5 turns, etc.): "
-                        )
+    elif answer in ["yes", "y"]:
+        while True:
+            try:
+                os.system("cls" if os.name == "nt" else "clear")
+                size = int(
+                    input(
+                        "Enter a number between 5 and 15.\n\nThis will determine how big the playing board is and how many turns you have to find the Battleship. (5 rows, 5 columns, 5 turns, etc.): "
                     )
-                    if size not in range(5, 16):
-                        raise ValueError()
-                except ValueError:
-                    print("You did not enter a number!")
-                    continue
-                else:
-                    break
+                )
+                if size not in range(5, 16):
+                    raise ValueError()
+            except ValueError:
+                print("You did not enter a number!")
+                continue
+            else:
+                break
 
             # Creates the playing board's size, based on the size chosen by the player.
-            for x in range(0, size):
-                board.append(["O"] * size)
-            game()
-        elif answer == "no" or answer == "n":
-            os.system("cls" if os.name == "nt" else "clear")
-            print("Thank you for playing!\n")
-            input("Press the 'Enter' key to exit the game.")
-            os.system("cls" if os.name == "nt" else "clear")
-            quit()
+        for _ in range(0, size):
+            board.append(["O"] * size)
+        game()
+    elif answer in ["no", "n"]:
+        os.system("cls" if os.name == "nt" else "clear")
+        print("Thank you for playing!\n")
+        input("Press the 'Enter' key to exit the game.")
+        os.system("cls" if os.name == "nt" else "clear")
+        quit()
 
 
 def print_board(board):

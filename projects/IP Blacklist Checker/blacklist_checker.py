@@ -27,9 +27,7 @@ def test_ip(ip: str) -> Any:
     elif result_dec.get("detections") != 0:
         res = ip
         blsts = result_dec.get("blacklists")
-        for n in blsts:
-            if n.get("detected") is True:
-                detects.append(n.get("name"))
+        detects.extend(n.get("name") for n in blsts if n.get("detected") is True)
         return (
             res,
             detects,
@@ -53,26 +51,24 @@ if len(sys.argv) > 1:
     for x in sys.argv[1:]:
         if isip(x) is not True:
             print(f"IP {x} is incorrect\n")
-        else:
-            if test_ip(x) is not None:
-                res, detec = test_ip(x)
-                if res == "limit exceeded":
-                    res_txt = res_txt + " LIMIT Exceeded!"
-                    break
-                else:
-                    res_txt += f"{res} is detected in {detec} blacklists \n \n"
+        elif test_ip(x) is not None:
+            res, detec = test_ip(x)
+            if res == "limit exceeded":
+                res_txt = f"{res_txt} LIMIT Exceeded!"
+                break
+            else:
+                res_txt += f"{res} is detected in {detec} blacklists \n \n"
 else:
     print("Type in ip to check")
     x = input()
     if isip(x) is not True:
         print(f"IP {x} is incorrect\n")
-    else:
-        if test_ip(x) is not None:
-            res, detec = test_ip(x)
-            if res == "limit exceeded":
-                res_txt = res_txt + "Limit Exceeded!\n"
-            else:
-                res_txt += f"{res} is detected in {detec} blacklists \n \n"
+    elif test_ip(x) is not None:
+        res, detec = test_ip(x)
+        if res == "limit exceeded":
+            res_txt = res_txt + "Limit Exceeded!\n"
+        else:
+            res_txt += f"{res} is detected in {detec} blacklists \n \n"
 if len(res_txt) <= 43:
     print("IPs not blacklisted!")
     print(res_txt)

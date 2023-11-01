@@ -12,9 +12,7 @@ st.set_page_config(page_title="PredictO", layout="wide", page_icon=":pill:")
 
 def load_lottieurl(url: str):
     r = requests.get(url)
-    if r.status_code != 200:
-        return None
-    return r.json()
+    return None if r.status_code != 200 else r.json()
 
 
 # -------------ASSETS-------------
@@ -123,8 +121,7 @@ with st.container():
                 "Pregnancies": pregnancies,
                 "Age": age,
             }
-            report_data = pd.DataFrame(user_report_data, index=[0])
-            return report_data
+            return pd.DataFrame(user_report_data, index=[0])
 
         # Initialize user_result outside the if block
         user_result = None
@@ -144,11 +141,10 @@ with st.container():
             if user_result[0] == 0:
                 st_lottie(lottie_files2, height=300, key="healthy")
                 st.write(" ##### Prediction: You are not Diabetic")
-                st.write(f"Training Data Accuracy: {train_accuracy:.2f}%")
             else:
                 st_lottie(lottie_files3, height=300, key="unhealthy")
                 st.write(" ##### Prediction: You are Diabetic")
-                st.write(f"Training Data Accuracy: {train_accuracy:.2f}%")
+            st.write(f"Training Data Accuracy: {train_accuracy:.2f}%")
 if user_result is not None:
     with st.container():
         st.write("---")
@@ -163,12 +159,10 @@ if user_result is not None:
                 if gender == "male":
                     bmr = 10 * weight + 6.25 * height - 5 * age + 5
 
-                    st.write("Your Basal Metabolic Rate(BMR) is ", bmr, "calories/day")
-
                 else:
                     bmr = 10 * weight + 6.25 * height - 5 * age - 161
 
-                    st.write("Your Basal Metabolic Rate(BMR) is ", bmr, "calories/day")
+                st.write("Your Basal Metabolic Rate(BMR) is ", bmr, "calories/day")
 
             st.write("##")
             st.write("##")
@@ -196,7 +190,6 @@ if user_result is not None:
                                             check on my fitness condition based on the parameters I have mentioned. 
                                             Give suggestions in points, avoid using any other comprehension other 
                                             than what is asked for and keep it user friendly."""
-            if user_result is not None:
                 data = chat(query)
 
                 # Printing the data in a box using markdown

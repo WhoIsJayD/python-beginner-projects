@@ -165,7 +165,7 @@ def play(word):
         print("Congrats, you guessed the word! You win!")
 
     else:
-        print("Sorry, you ran out of tries. The word was " + word + ". play again :)")
+        print(f"Sorry, you ran out of tries. The word was {word}. play again :)")
 
 
 def main():

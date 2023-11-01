@@ -75,10 +75,8 @@ def get_all_chapter_links():
 
 
 def scrape_data():
-    f = open("links.txt", "r")
-    chapters = f.readlines()
-    f.close()
-
+    with open("links.txt", "r") as f:
+        chapters = f.readlines()
     # Sample chapter link
     # https://jujutsu.jujmanga.com/manga/jujutsu-kaisen-chapter-189/
 
@@ -131,9 +129,9 @@ def scrape_data():
         images = soup.find_all("img")
 
         # Creating a separate folder for each chapter
-        folder_name = "{}".format(chapter)
+        folder_name = f"{chapter}"
         current_directory = os.getcwd()
-        final_directory = os.path.join(current_directory, r"{}".format(folder_name))
+        final_directory = os.path.join(current_directory, f"{folder_name}")
         if not os.path.exists(final_directory):
             os.makedirs(final_directory)
 
@@ -155,7 +153,7 @@ def scrape_data():
                 # Dynamically creating the file name for every image
                 # in a given chapter. Please feel free to change
                 # this to your liking
-                fname = "{}/{}_{}.jpg".format(chapter, chapter, i)
+                fname = f"{chapter}/{chapter}_{i}.jpg"
                 file_paths.append(fname)
 
                 # Downloading the file :
@@ -184,7 +182,7 @@ def zip_files():
     file_paths = []
     for root, dirs, files in os.walk("./"):
         for f in files:
-            fname = "{}/{}".format(root, f)
+            fname = f"{root}/{f}"
             file_paths.append(fname)
 
     # Sort numerically wrt Chapter No. then the Image No.
@@ -201,7 +199,7 @@ def zip_files():
     # you plan to download all the chapters
     with ZipFile("Jujutsu_Kaisen.cbz", "w") as zip:
         for file in file_paths:
-            msg = "Zipping {} . . . ".format(file)
+            msg = f"Zipping {file} . . . "
             print(msg)
             zip.write(file)
 

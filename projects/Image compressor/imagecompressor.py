@@ -9,7 +9,7 @@ def compressImage(input_file, output_dir, quality=85, format="JPEG"):
         img = Image.open(input_file)
         img = img.resize(img.size, Image.ANTIALIAS)
         output_filename = os.path.join(
-            output_dir, "compressed_" + os.path.basename(input_file)
+            output_dir, f"compressed_{os.path.basename(input_file)}"
         )
         img.save(output_filename, format=format, quality=quality)
         print(f"Image compressed and saved as '{output_filename}'")

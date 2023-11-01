@@ -2,17 +2,15 @@ def calculate_loan_payment(principal, annual_interest_rate, months):
     # Convert annual interest rate to monthly rate
     monthly_interest_rate = annual_interest_rate / 12 / 100
 
-    # Calculate monthly payment
-    if monthly_interest_rate == 0:
-        monthly_payment = principal / months
-    else:
-        monthly_payment = (
+    return (
+        principal / months
+        if monthly_interest_rate == 0
+        else (
             principal
             * (monthly_interest_rate * (1 + monthly_interest_rate) ** months)
             / ((1 + monthly_interest_rate) ** months - 1)
         )
-
-    return monthly_payment
+    )
 
 
 def main():

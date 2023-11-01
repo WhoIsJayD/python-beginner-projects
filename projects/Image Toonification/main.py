@@ -22,7 +22,7 @@ def color_quantization(img, k):
 def edge_mask(img, line_size, blur_value):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     gray_blur = cv2.medianBlur(gray, blur_value)
-    edges = cv2.adaptiveThreshold(
+    return cv2.adaptiveThreshold(
         gray_blur,
         255,
         cv2.ADAPTIVE_THRESH_MEAN_C,
@@ -30,7 +30,6 @@ def edge_mask(img, line_size, blur_value):
         line_size,
         blur_value,
     )
-    return edges
 
 
 img = cv2.imread(

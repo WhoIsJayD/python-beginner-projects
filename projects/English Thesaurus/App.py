@@ -21,9 +21,8 @@ def eng_thesaurus(word):
             if i == 0:
                 print("Meaning 1:", found[i])
             else:
-                print("Meaning " + str(i + 1) + ":", found[i])
+                print(f"Meaning {str(i + 1)}:", found[i])
 
-    # If word entered has an incorrect spelling
     else:
         # Matches with the word with the closet spelling
         closet_word = get_close_matches(word, data.keys(), cutoff=0.75)
@@ -33,7 +32,7 @@ def eng_thesaurus(word):
             x = data[closet_word[j]]
             if op == "Y":
                 for k in range(0, len(x)):
-                    print("Meaning " + str(k + 1), ":", x[k])
+                    print(f"Meaning {str(k + 1)}", ":", x[k])
                 break
             elif op == "N":
                 print(

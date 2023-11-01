@@ -11,6 +11,7 @@ NOTE: Install rich before playing this game by the command "pip install rich".
 """
 
 
+
 import random
 from rich import print as rprint
 
@@ -18,7 +19,6 @@ if __name__ == "__main__":
     CHOICES = ["s", "w", "g"]
 
     CHANCE = 10
-    NO_OF_CHANCE = 0
     COMPUTER_POINT = 0
     HUMAN_POINT = 0
 
@@ -28,7 +28,7 @@ if __name__ == "__main__":
     )
 
     # making the game in while
-    while NO_OF_CHANCE < CHANCE:
+    for NO_OF_CHANCE in range(1, CHANCE + 1):
         user_choice = input("Enter your choice >> ")
         computer_choice = random.choice(CHOICES)
 
@@ -45,12 +45,12 @@ if __name__ == "__main__":
                     HUMAN_POINT += 1
                     WINNER = "Human"
             elif user_choice.lower() == "w":
-                if computer_choice == "s":
-                    COMPUTER_POINT += 1
-                    WINNER = "Computer"
-                elif computer_choice == "g":
+                if computer_choice == "g":
                     HUMAN_POINT += 1
                     WINNER = "Human"
+                elif computer_choice == "s":
+                    COMPUTER_POINT += 1
+                    WINNER = "Computer"
             elif user_choice.lower() == "g":
                 if computer_choice == "s":
                     HUMAN_POINT += 1
@@ -65,7 +65,6 @@ if __name__ == "__main__":
                 f"[{'green' if WINNER == 'Human' else 'red'}]{WINNER} wins 1 point[/{'green' if WINNER == 'Human' else 'red'}] \n"
             )
 
-        NO_OF_CHANCE += 1
         rprint(f"{CHANCE - NO_OF_CHANCE} chance(s) are left out of {CHANCE} chances.\n")
 
     print("Game over!")

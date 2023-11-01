@@ -34,15 +34,13 @@ else:
 
         # for loop runs 4 times since the number has 4 digits.
         for i in range(0, 4):
-            # checking for equality of digits
-            if n[i] == num[i]:
-                # number of digits guessed correctly increments
-                count += 1
-                # hence, the digit is stored in correct[].
-                correct[i] = n[i]
-            else:
+            if n[i] != num[i]:
                 continue
 
+            # number of digits guessed correctly increments
+            count += 1
+            # hence, the digit is stored in correct[].
+            correct[i] = n[i]
         # when not all the digits are guessed correctly.
         if (count < 4) and (count != 0):
             print("Not quite the number. But you did get ", count, " digit(s) correct!")

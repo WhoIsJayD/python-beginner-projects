@@ -24,10 +24,7 @@ def eye_aspect_ratio(eye):
     # compute the euclidean distance between the horizontal
     # eye landmark (x, y)-coordinates
     C = dist.euclidean(eye[0], eye[3])
-    # compute the eye aspect ratio
-    ear = (A + B) / (2.0 * C)
-    # return the eye aspect ratio
-    return ear
+    return (A + B) / (2.0 * C)
 
 
 # construct the argument parse and parse the arguments
@@ -109,8 +106,6 @@ while True:
         # threshold, and if so, increment the blink frame counter
         if ear < EYE_AR_THRESH:
             COUNTER += 1
-        # otherwise, the eye aspect ratio is not below the blink
-        # threshold
         else:
             # if the eyes were closed for a sufficient number of
             # then increment the total number of blinks
@@ -123,7 +118,7 @@ while True:
             # the computed eye aspect ratio for the frame
             cv2.putText(
                 frame,
-                "Blinks: {}".format(TOTAL),
+                f"Blinks: {TOTAL}",
                 (10, 30),
                 cv2.FONT_HERSHEY_SIMPLEX,
                 0.7,
@@ -140,7 +135,7 @@ while True:
                 2,
             )
 
-            # show the frame
+                    # show the frame
         cv2.imshow("Frame", frame)
         key = cv2.waitKey(1) & 0xFF
 

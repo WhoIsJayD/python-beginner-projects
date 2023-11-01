@@ -15,7 +15,7 @@ def generate():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 exit()
-        board = [[0 for i in range(9)] for j in range(9)]
+        board = [[0 for _ in range(9)] for _ in range(9)]
 
         for i in range(9):
             for j in range(9):
@@ -224,11 +224,11 @@ def main():
         passedTime = time.strftime("%H:%M:%S", time.gmtime(elapsed))
 
         if board.board == board.solvedBoard:
+            running = False
+
             for i in range(9):
                 for j in range(9):
                     board.tiles[i][j].selected = False
-                    running = False
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 exit()
@@ -267,9 +267,7 @@ def main():
 
                     if event.key == pygame.K_9:
                         keyDict[selected] = 9
-                    elif (
-                        event.key == pygame.K_BACKSPACE or event.key == pygame.K_DELETE
-                    ):
+                    elif event.key in [pygame.K_BACKSPACE, pygame.K_DELETE]:
                         if selected in keyDict:
                             board.tiles[selected[1]][selected[0]].value = 0
                             del keyDict[selected]

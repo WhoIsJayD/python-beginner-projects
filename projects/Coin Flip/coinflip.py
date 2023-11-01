@@ -15,7 +15,7 @@ while True:
     # Picks randonly from the list
     random_s = random.choice(list1)
 
-    print("You got... " + random_s)
+    print(f"You got... {random_s}")
 
     if answer.lower() == random_s:
         # Tells the user if they won

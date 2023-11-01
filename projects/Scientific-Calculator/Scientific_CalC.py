@@ -20,35 +20,29 @@ def sc(event):
     text = key["text"]
     no = e.get()
     result = ""
-    if text == "deg":
-        result = str(m.degrees(float(no)))
-    if text == "sin":
-        result = str(m.sin(float(no)))
-    if text == "cos":
-        result = str(m.cos(float(no)))
-    if text == "tan":
-        result = str(m.tan(float(no)))
-    if text == "lg":
-        result = str(m.log10(float(no)))
-    if text == "ln":
-        result = str(m.log(float(no)))
-    if text == "Sqrt":
-        result = str(m.sqrt(float(no)))
-
-    if text == "x!":
-        result = str(m.factorial(float(no)))
     if text == "1/x":
         result = str(1 / (float(no)))
-    if text == "pi":
-        if no == "":
-            result = str(m.pi)
-        else:
-            result = str(float(no) * m.pi)
-    if text == "e":
-        if no == "":
-            result = str(m.e)
-        else:
-            result = str(m.e ** float(no))
+    elif text == "Sqrt":
+        result = str(m.sqrt(float(no)))
+
+    elif text == "cos":
+        result = str(m.cos(float(no)))
+    elif text == "deg":
+        result = str(m.degrees(float(no)))
+    elif text == "e":
+        result = str(m.e) if no == "" else str(m.e ** float(no))
+    elif text == "lg":
+        result = str(m.log10(float(no)))
+    elif text == "ln":
+        result = str(m.log(float(no)))
+    elif text == "pi":
+        result = str(m.pi) if no == "" else str(float(no) * m.pi)
+    elif text == "sin":
+        result = str(m.sin(float(no)))
+    elif text == "tan":
+        result = str(m.tan(float(no)))
+    elif text == "x!":
+        result = str(m.factorial(float(no)))
     e.delete(0, END)
     e.insert(0, result)
 

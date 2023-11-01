@@ -45,48 +45,39 @@ class Game:
     def get_sentence(self):
         f = open("sentences.txt").read()
         sentences = f.split("\n")
-        sentence = random.choice(sentences)
-        return sentence
+        return random.choice(sentences)
 
     def show_results(self, screen):
-        if not self.end:
-            # Calculate time
-            self.total_time = time.time() - self.time_start
+        if self.end:
+            return
+        # Calculate time
+        self.total_time = time.time() - self.time_start
 
-            # Calculate accuracy
-            count = 0
-            for i, c in enumerate(self.word):
-                try:
-                    if self.input_text[i] == c:
-                        count += 1
-                except:
-                    pass
-            self.accuracy = count / len(self.word) * 100
+        # Calculate accuracy
+        count = 0
+        for i, c in enumerate(self.word):
+            try:
+                if self.input_text[i] == c:
+                    count += 1
+            except:
+                pass
+        self.accuracy = count / len(self.word) * 100
 
-            # Calculate words per minute
-            self.wpm = len(self.input_text) * 60 / (5 * self.total_time)
-            self.end = True
-            print(self.total_time)
+        self.end = True
+        self.wpm = len(self.input_text) * 60 / (5 * self.total_time)
+        print(self.total_time)
 
-            self.results = (
-                "Time:"
-                + str(round(self.total_time))
-                + " secs   Accuracy:"
-                + str(round(self.accuracy))
-                + "%"
-                + "   Wpm: "
-                + str(round(self.wpm))
-            )
+        self.results = f"Time:{str(round(self.total_time))} secs   Accuracy:{str(round(self.accuracy))}%   Wpm: {str(round(self.wpm))}"
 
-            # draw icon image
-            self.time_img = pygame.image.load("icon.png")
-            self.time_img = pygame.transform.scale(self.time_img, (150, 150))
-            # screen.blit(self.time_img, (80,320))
-            screen.blit(self.time_img, (self.w / 2 - 75, self.h - 140))
-            self.draw_text(screen, "Reset", self.h - 70, 26, (100, 100, 100))
+        # draw icon image
+        self.time_img = pygame.image.load("icon.png")
+        self.time_img = pygame.transform.scale(self.time_img, (150, 150))
+        # screen.blit(self.time_img, (80,320))
+        screen.blit(self.time_img, (self.w / 2 - 75, self.h - 140))
+        self.draw_text(screen, "Reset", self.h - 70, 26, (100, 100, 100))
 
-            print(self.results)
-            pygame.display.update()
+        print(self.results)
+        pygame.display.update()
 
     def run(self):
         self.reset_game()

@@ -205,7 +205,7 @@ class Application:
             return
 
         self.possible_moves = list(self.game_board.all_legal_moves(self.turn))
-        if self.possible_moves == []:
+        if not self.possible_moves:
             if self.turn == Board.BLACK:
                 self.hasBlackForfeited = True
             else:
